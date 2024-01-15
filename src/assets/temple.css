@@ -1,0 +1,166 @@
+@import './common.css';
+
+/* 顶部开始 */
+.top{
+    height: 60px;
+    background-color: #3c3c3c;
+}
+/* 顶部结束 */
+/*版心*/
+.center{
+    width: 100%;
+    margin: 0 auto;
+    
+}
+.top .top_c{
+    height: 60px;
+    line-height: 60px;
+    
+    /* background-color: #2d2a2a; */
+}
+.top .top_c {
+    color: white;
+    font-size: 18px;
+}
+.top .top_c span{
+    color: aqua;
+}
+/* logo begin */
+.logo{
+    height: 74px;
+    background-color: #2d2a2a;
+}
+.logo .l_c{
+    height: 74px;
+    
+}
+.logo .l_left h1 a{
+    display:inline-block;
+    width: 80px;
+    height: 74px;
+    /* 高和宽和替换图片一致 */
+    background:url(../images/logo.png);
+    text-indent: -9999em;
+}
+
+.logo .l_right ul li{
+    /* flex: 1; */
+    float: left;
+    
+}
+.l_right ul li a{
+    display: block;
+    height: 44px;
+    padding: 10px 20px;
+    line-height: 44px;
+    font-size: 18px;
+    color: rgba(255, 255, 255, 0.7);
+
+}
+.l_right ul li a:hover{
+    border-bottom: 2px solid aqua;
+    color: #eee;
+    
+}
+.arrow-icon::after{
+    content: '\ea51';
+    font-family: 'icomoon';
+}
+.arrow-icon1::before{
+    content: '\ea50';
+    font-family: 'icomoon';
+    margin-right: 6px;
+    
+    
+}
+/* logo end */
+
+
+/* 内容begin */
+#simple_search_form{
+    margin-top: 800px;
+}
+.form-control{
+    margin-top: 20px;
+    
+}
+
+/* 内容end */
+
+/* 底部begin */
+.foot{
+   
+    height: 450px;
+    background-color:#3a7eb9;
+}
+.foot .center{
+    
+    height: 440px;
+}
+
+.foot .f_c{
+    
+    margin-top: 2000px;
+    
+} 
+.foot .f_up{
+    height: 340px;
+/*父级使用下边两行代码使得子模块均匀分布*/
+    display: flex;
+    justify-content:space-between;
+    margin-top: 20px;
+    padding: 50px ;
+    
+}
+.foot .f_up h4,p{
+    color: white;
+    font-size: 16px;
+    margin-left: 30px;
+    
+}
+.foot .f_up h3{
+    color: white;
+    font-size: 16px;
+    margin-left: 30px;
+}
+.foot .f_up ul li{
+    margin-top: 15px;
+    
+   
+}
+.foot .f_up ul li a{
+    color:rgba(255, 255, 255, 0.75) ;
+    font-size: 14px;
+    margin-top: 5px;
+    margin-left: 5px;
+}
+.foot .f_up ul li a:hover{
+    
+    color: #eee;
+    
+}
+.f_down{
+    height: 100px;
+    background-color: black;
+}
+.f_down_center{
+    font-size: 14px;
+    color: white;
+    height: 100px;
+    line-height: 100px;
+    margin-left: 500px;
+}
+.f_down_center a{
+    color:#3a7eb9 ;
+}
+.f_down_center a:hover{
+    
+    color: #eee;
+    
+}
+.f_up a{
+    text-decoration: none;
+}
+
+
+/* 底部end */
