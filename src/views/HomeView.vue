@@ -1,9 +1,10 @@
 <script setup>
-import Footer from '../components/Footer.vue'
+import Welcome from '../components/Welcome.vue'
+
 </script>
 
 <template>
   <main>
-    <Footer />
+    <Welcome />
   </main>
 </template>

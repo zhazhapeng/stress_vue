@@ -2,6 +2,7 @@
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
 import Header from './components/Header.vue'
+import Footer from './components/Footer.vue'
 </script>
 
 <template>
@@ -17,6 +18,7 @@ import Header from './components/Header.vue'
   </header> -->
   <Header />
   <RouterView />
+  <Footer />
 </template>
 
 <style scoped>
@@ -58,7 +60,7 @@ nav a:first-of-type {
   }
 
   .logo {
-    margin: 0 2rem 0 0;
+    margin: 0 2rem 4rem 0;
   }
 
   header .wrapper {
