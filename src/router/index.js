@@ -43,6 +43,17 @@ const router = createRouter({
       component: () => import('../components/About.vue')
     },
     {
+      path: '/result',
+      name: 'result',
+      component: () => import('../components/Result.vue')
+    },
+    {
+      path: '/charts',
+      name: 'charts',
+      component: () => import('../components/Charts.vue')
+    },
+    
+    {
       path: '/citation',
       name: 'citation',
       component: () => import('../components/Citation.vue')

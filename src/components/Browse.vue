@@ -435,7 +435,7 @@
             </div>
             <br /><br />
             <div>
-              <span id="protein-pageInfo"></span>,
+              <span id="protein-pageInfo"></span>
               <select id="protein-selectColNumber" class="selectRowNumber">
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -451,12 +451,32 @@
               rows per page.
             </div>
             <div class="table-responsive">
-              <table
-                class="table table-bordered table-hover"
-                id="protein-option-show"
-              >
-                <tbody></tbody>
-              </table>
+              
+                <el-table
+                  :data="tableData"
+                  style="width: 100%">
+                  <el-table-column
+                    type="index"
+                    :index="indexMethod">
+                  </el-table-column>
+                  <el-table-column
+                    prop="date"
+                    label="日期"
+                    width="180">
+                  </el-table-column>
+                  <el-table-column
+                    prop="name"
+                    label="姓名"
+                    width="180">
+                  </el-table-column>
+                  <el-table-column
+                    prop="address"
+                    label="地址">
+                  </el-table-column>
+                </el-table>
+
+
+              <!-- </table> -->
             </div>
             <div class="row">
               <div class="col-md-6"></div>
@@ -514,6 +534,8 @@
 </template>
 
 <script>
+import { store } from '../store.js'
+
 export default {
   name: "Footer",
   components: {
@@ -522,6 +544,40 @@ export default {
   data() {
     return {
       // 在这里定义组件的初始数据
+      // tableData: [{
+      //     date: '2016-05-02',
+      //     name: '王小虎',
+      //     province: '上海',
+      //     city: '普陀区',
+      //     address: '上海市普陀区金沙江路 1518 弄',
+      //     zip: 200333,
+      //     tag: '家'
+      //   }, {
+      //     date: '2016-05-04',
+      //     name: '王小虎',
+      //     province: '上海',
+      //     city: '普陀区',
+      //     address: '上海市普陀区金沙江路 1517 弄',
+      //     zip: 200333,
+      //     tag: '公司'
+      //   }, {
+      //     date: '2016-05-01',
+      //     name: '王小虎',
+      //     province: '上海',
+      //     city: '普陀区',
+      //     address: '上海市普陀区金沙江路 1519 弄',
+      //     zip: 200333,
+      //     tag: '家'
+      //   }, {
+      //     date: '2016-05-03',
+      //     name: '王小虎',
+      //     province: '上海',
+      //     city: '普陀区',
+      //     address: '上海市普陀区金沙江路 1516 弄',
+      //     zip: 200333,
+      //     tag: '公司'
+      //   }],
+        tableData: store.searchData,
     };
   },
   computed: {
@@ -529,6 +585,9 @@ export default {
   },
   methods: {
     // 在这里定义方法
+    indexMethod(index) {
+      return index * 2;
+    }
   },
   created() {
     // 在这里执行组件创建后的逻辑

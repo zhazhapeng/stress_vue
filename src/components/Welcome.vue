@@ -32,12 +32,11 @@
       </div>
     </div>
     <!-- 内容开始 -->
-    <form
+    <!-- <form
       id="simple_search_form"
-      action="result.php"
+      action=""
       method="post"
-      onSubmit="return check_simple_search_form()"
-    >
+    > -->
       <input type="hidden" name="type" value="search" />
       <div class="row">
         <div class="col-md-3"></div>
@@ -170,25 +169,81 @@
           </select>
         </div>
         <div class="col-md-2">
-          <button type="button" class="form-control btn btn-info" id="Example">
+          <button @click="randomSelect()" type="button" class="form-control btn btn-info" id="Example">
             Example
           </button>
         </div>
         <div class="col-md-2">
-          <button type="reset" class="form-control btn btn-success">
+          <button type="reset" @click="reset()" class="form-control btn btn-success">
             Clear
           </button>
         </div>
         <div class="col-md-2">
-          <button type="submit" class="form-control btn btn-warning">
+          <button type="submit" @click="searchData()" class="form-control btn btn-warning">
             Submit
           </button>
         </div>
       </div>
-    </form>
+    <!-- </form> -->
   </div>
 </template>
 
+<script>
+import { store } from '../store.js'
+
+export default {
+  name: "Welcome",
+  data() {
+    return {
+
+    }
+  },
+  methods: {
+    randomSelect() {
+      console.log("randomSelect");
+      let options1 = document.getElementById("simple_search_tag0").options;
+      let options3 = document.getElementById("simple_search_org").options;
+      let options4 = document.getElementById("simple_search_mod").options;
+      // 随机选择
+      let randomSeed = Math.floor(Math.random() * options1.length);
+      options1[randomSeed].selected = true;
+      options3[randomSeed].selected = true;
+      options4[randomSeed].selected = true;
+      document.getElementById("simple_search_input0").value = "MADS23";
+    },
+    reset() {
+      let options1 = document.getElementById("simple_search_tag0").options;
+      // let inputVal = document.getElementById("simple_search_input0").value;
+      let options3 = document.getElementById("simple_search_org").options;
+      let options4 = document.getElementById("simple_search_mod").options;
+      document.getElementById("simple_search_input0").value = "";
+      options1[0].selected = true;
+      options3[0].selected = true;
+      options4[0].selected = true;
+    },
+    searchData(){
+      let field = document.getElementById("simple_search_tag0").value;
+      let name = document.getElementById("simple_search_input0").value;
+      let organisms = document.getElementById("simple_search_org").value;
+      let modifications = document.getElementById("simple_search_mod").value;
+
+      this.$axios.post("/search", {
+        data: {
+          field,
+          name,
+          organisms,
+          modifications
+        }}).then(res =>{
+          // 跳转到result页面,需要把查询到的信息塞到result页面里
+          console.log(res,'------res');
+          store.SetSearchData(res.data);
+          this.$router.push('/result');
+        })
+
+    }
+  }
+}
+</script>
 <style scoped>
 @media (min-width: 1024px) {
   .text-center {
