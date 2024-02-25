@@ -26,22 +26,13 @@
             </div>
             <div class="l_right fr">
                 <ul>
-                    
-                    <li class="active"><a href="./index.html">Home</a></li>
-                    <li><a href="./browse.html">Browse</a></li>
-                    <li><a href="./search.html">Search</a></li>
-                    <li><a href="./download.html">Download</a></li>
-                    <li><a href="./help.html">Help</a></li>
-                    <li><a href="./about.html">About</a></li>
-                    <li><a href="./citation.html">Citation</a></li>
-                    <li  id="list"><a href="#" class="arrow-icon">LZX Lab </a>
-                        <ul  id="under" style="display: none" >
-                            <li ><a href="#"></a>Introduction</li>
-                            <li ><a href="#"></a>Databases</li>
-                            <li ><a href="#"></a>Tools</li>
-                        </ul>
-
-                    </li>
+                    <li class="active"><router-link to="/index">Home</router-link></li>
+                    <li><router-link to="/browse">Browse</router-link></li>
+                    <li><router-link to="/search">Search</router-link></li>
+                    <li><router-link to="/download">Download</router-link></li>
+                    <li><router-link to="/help">Help</router-link></li>
+                    <li><router-link to="/about">About</router-link></li>
+                    <li><router-link to="/citation">Citation</router-link></li>
                 </ul>
             </div>
         </div>
@@ -50,6 +41,8 @@
 </template>
 
 <script>
+import { RouterLink } from 'vue-router'
+
 export default {
   name: 'Header',
   components: {
@@ -79,7 +72,7 @@ export default {
 .header {
   /* 在这里添加你的 CSS 样式 */
   width: 100%;
-
+  margin-bottom: 30px;
   .fr {
     float: left;
   }
