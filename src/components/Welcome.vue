@@ -204,6 +204,7 @@ export default {
       let options1 = document.getElementById("simple_search_tag0").options;
       let options3 = document.getElementById("simple_search_org").options;
       let options4 = document.getElementById("simple_search_mod").options;
+      
       // 随机选择
       let randomSeed = Math.floor(Math.random() * options1.length);
       options1[randomSeed].selected = true;

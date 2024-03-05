@@ -70,9 +70,11 @@
                    <div class="more-info" >
                         <table class="more-table">
                             <tbody>
-                                <tr>
+                                <tr v-for="item in SearchData" :key="item.id">
                                     <td width="15%">Resource</td>
-                                    <td><a href="https://pubmed.ncbi.nlm.nig.gov/28154133/">28154133</a></td>
+                                    <td><a href="https://pubmed.ncbi.nlm.nig.gov/28154133/">
+                                        1
+                                    </a></td>
                                 </tr>
                                 <tr>
                                     <td>Condition detail</td>
@@ -330,7 +332,7 @@
                 
             </tr> 
         </tbody>
-
+        
         </table>
         <div class="card-body">
             
@@ -363,15 +365,13 @@
  
 </template>
 <script>
-const parentRows=document.querySelectorAll('.parent-row');
-            parentRows.forEach(parentRow =>{
-                parentRow.addEventListener('click',()=>{
-                    parentRow.classList.toggle('expanded');
-                })
-            })
+import { store } from '../store.js' 
+
 export default {
     data() {
       return {
+        
+        
         options: [
           {
             value: '选项1',
@@ -395,8 +395,26 @@ export default {
           },
         ],
         value: '',
+        
       }
     },
+    
+    // method:{
+        //  parentRows() {
+        //     parentRows=document.querySelectorAll('.parent-row');
+        //     parentRows.forEach(parentRow =>{
+        //         parentRow.addEventListener('click',()=>{
+        //             parentRow.classList.toggle('expanded');
+        //         })
+        //     })
+        // }
+    // }
+    
+    computed: {  
+        searchData() {  
+      return this.$store.SearchData;  
+    } 
+    }
   }
 </script>
 
@@ -498,6 +516,7 @@ p{
     text-align:center;
     
    
+
     
 }
 .parent-row.expanded + .nexted-content{
@@ -528,3 +547,84 @@ button:focus{
 }
 
 </style>
+
+
+<template #default="props">
+    <!-- <div class="btn-group">
+      <button>About experiment</button>
+      <button>About protein</button>
+      <button>Sequence and Structure</button>
+    </div> -->
+    <div class="card_1">
+    <el-form label-position="left"  inline class=".demo-table-expand">
+      <el-form-item label="Resource" >
+        <span >{{ props.row.Resource }}</span>
+      </el-form-item>
+      <el-form-item label="Condition detail" >
+        
+        <span>{{ props.row.Conditiondetail }}</span>
+        
+      </el-form-item>
+      <el-form-item label="Sample type" >
+        
+        <span>{{ props.row.Sampletype }}</span>
+        
+      </el-form-item>
+      <el-form-item label="Enrichment method" >
+        
+        <span>{{ props.row.Sampletype }}</span>
+        
+      </el-form-item>
+      <el-form-item label="Mass spectrometer" >
+       
+        <span>{{ props.row.Sampletype }}</span>
+        
+      </el-form-item>
+      <el-form-item label="Search database" >
+        
+        <span>{{ props.row.Sampletype }}</span>
+       
+      </el-form-item>
+      <el-form-item label="FDR" >
+        
+        <span>{{ props.row.Sampletype }}</span>
+        
+      </el-form-item>
+      <el-form-item label="Precursor mass tolerance" >
+       
+        <span>{{ props.row.Sampletype }}</span>
+       
+      </el-form-item>
+      <el-form-item label="Protease" >
+       
+        <span>{{ props.row.Sampletype }}</span>
+       
+      </el-form-item>
+      <el-form-item label="Variable modifications" >
+        
+        <span>{{ props.row.Sampletype }}</span>
+        
+      </el-form-item>
+      <el-form-item label="Fixed modification" >
+       
+        <span>{{ props.row.Sampletype }}</span>
+        
+      </el-form-item>
+      <el-form-item label="Decoy strategy" >
+       
+        <span>{{ props.row.Sampletype }}</span>
+       
+      </el-form-item>
+      <el-form-item label="PRIDE accession" >
+        
+        <span>{{ props.row.Sampletype }}</span>
+       
+      </el-form-item>
+      <el-form-item label="Raw peptide" >
+          
+        <span>{{ props.row.Rawpeptide }}</span>
+       
+      </el-form-item>
+    </el-form>
+    </div>
+  </template>

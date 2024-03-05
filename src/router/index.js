@@ -6,8 +6,8 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/about',
-      name: 'about',
+      path: '/xz',
+      name: 'xiazai',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
@@ -38,11 +38,7 @@ const router = createRouter({
       name: 'help',
       component: () => import('../components/Help.vue')
     },
-    {
-      path: '/about',
-      name: 'about',
-      component: () => import('../components/About.vue')
-    },
+
     {
       path: '/result',
       name: 'result',
@@ -53,47 +49,24 @@ const router = createRouter({
       name: 'charts',
       component: () => import('../components/Charts.vue')
     },
-    
-    {
-      path: '/citation',
-      name: 'citation',
-      component: () => import('../components/Citation.vue')
-    },
+
+
     {
       path: '/:pathMatch(.*)*',
       // redirect: '/'
       component: HomeView
     }
     ,
+
+
     {
-      path: '/search',
-      name: 'search',
-      component: () => import('../views/search.vue')
-    }
-    ,
-    {
-      path: '/browse',
-      name: 'browse',
+      path: '/browse1',
+      name: 'browse1',
       component: () => import('../views/BrowseView.vue')
     }
     ,
-    {
-      path: '/down',
-      name: 'dowm',
-      component: () => import('../views/DownView.vue')
-    }
-    ,
-    {
-      path: '/help',
-      name: 'help',
-      component: () => import('../views/HelpView.vue')
-    }
-    ,
-    {
-      path: '/result',
-      name: 'result',
-      component: () => import('../views/ResultView.vue')
-    }
+
+
   ]
 })
 

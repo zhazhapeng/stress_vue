@@ -405,11 +405,11 @@
           </div>
 
           <div class="card-body">
-            <div class="row">
-              <div class="col-md-6">
+            <div class="row row1" >
+              <div class="col-md-6" ref="chartContainer1" >
                 <div class="browse-stat-plot" id="protein-stat-plot"></div>
               </div>
-              <div class="col-md-6">
+              <div class="col-md-6" ref="chartContainer2">
                 <div class="browse-stat-plot" id="condition-stat-plot"></div>
               </div>
               <!--div class="col-md-4"><div class="browse-stat-plot" id='sample-stat-plot'></div></div-->
@@ -535,71 +535,202 @@
 
 <script>
 import { store } from '../store.js'
+import * as echarts from 'echarts';  
+import axios from 'axios';  
+import { BarChart } from 'echarts/charts';  
+import { GridComponent, TooltipComponent } from 'echarts/components';  
+  
+// 注册必须的组件  
+echarts.use([BarChart, GridComponent, TooltipComponent]);  
+export default {  
+  data() {  
+    return {  
+      chart: null,  
+      categories: [], // 数据种类  
+      values: [] // 对应种类的值  
+    };  
+  },  
+  mounted() {  
+    this.renderChart1();  
+    this.renderChart2(); 
+    // this.fetchData();
+  },  
+  methods: {  
+    renderChart1() {  
+      // 获取图表容器  
+      const chartContainer1 = this.$refs.chartContainer1;  
+      
+  
+      // 初始化图表实例  
+      const myChart1 = echarts.init(chartContainer1);  
+      
+  
+      // 设置图表选项  
+      const option = {  
+        tooltip: {  
+          trigger: 'axis',  
+          axisPointer: {  
+            type: 'shadow'  
+          }  
+        },  
+        legend: {  
+          data: ['销量']  
+        },  
+        grid: {  
+          left: '3%',  
+          right: '4%',  
+          bottom: '3%',  
+          containLabel: true  
+        },  
+        xAxis: {  
+          type: 'category',  
+          boundaryGap: false,  
+          data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']  
+        },  
+        yAxis: {  
+          type: 'value'  
+        },  
+        series: [  
+          {  
+            name: '销量',  
+            type: 'bar',  
+            stack: '总量',  
+            label: {  
+              show: true,  
+              position: 'insideRight'  
+            },  
+            data: [120, 200, 150, 80, 70, 110, 130]  
+          }  
+        ]  
+      };  
+  
+      // 使用刚指定的配置项和数据显示图表。  
+      myChart1.setOption(option);  
+      
+    },
+    renderChart2() {  
+      // 获取图表容器  
+      const chartContainer2 = this.$refs.chartContainer2;  
+      
+  
+      // 初始化图表实例  
+      const myChart2 = echarts.init(chartContainer2);  
+      
+  
+      // 设置图表选项  
+      const option = {  
+        tooltip: {  
+          trigger: 'axis',  
+          axisPointer: {  
+            type: 'shadow'  
+          }  
+        },  
+        legend: {  
+          data: ['销量']  
+        },  
+        grid: {  
+          left: '3%',  
+          right: '4%',  
+          bottom: '3%',  
+          containLabel: true  
+        },  
+        xAxis: {  
+          type: 'category',  
+          boundaryGap: false,  
+          data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']  
+        },  
+        yAxis: {  
+          type: 'value'  
+        },  
+        series: [  
+          {  
+            name: '销量',  
+            type: 'bar',  
+            stack: '总量',  
+            label: {  
+              show: true,  
+              position: 'insideRight'  
+            },  
+            data: [120, 200, 150, 80, 70, 110, 130]  
+          }  
+        ]  
+      };  
+  
+      // 使用刚指定的配置项和数据显示图表。  
+      myChart2.setOption(option);  
+      
+    }, 
 
-export default {
-  name: "Footer",
-  components: {
-    // 在这里注册任何子组件
+
+    fetchData() {  
+      this.$axios.post("/data", {
+        data: {
+          field1
+         }}).then(response => {  
+          const data = response.data;  
+          // 假设后端返回的数据是一个对象数组，每个对象有 category 和 value 属性  
+          this.categories = Array.from(new Set(data.map(item => item.category))); // 获取不重复的种类  
+          this.values = this.categories.map(() => 0); // 初始化值为0的数组，长度与种类数量相同  
+  
+          data.forEach(item => {  
+            const index = this.categories.indexOf(item.category);  
+            this.values[index] += item.value; // 累加相同种类的值  
+          });  
+  
+          this.initChart(); // 数据处理完成后初始化图表  
+        })  
+        .catch(error => {  
+          console.error('Error fetching data:', error);  
+        });  
+    },  
+    initChart() {  
+      const chartContainer = this.$refs.chartContainer;  
+      this.chart = echarts.init(chartContainer);  
+  
+      const option = {  
+        tooltip: {  
+          trigger: 'axis'  
+        },  
+        xAxis: {  
+          type: 'category',  
+          data: this.categories  
+        },  
+        yAxis: {  
+          type: 'value'  
+        },  
+        series: [{  
+          data: this.values,  
+          type: 'bar'  
+        }]  
+      };  
+  
+      this.chart.setOption(option);  
+    }  
+  },  
+  beforeDestroy() {  
+    if (this.chart) {  
+      this.chart.dispose();  
+    }  
   },
-  data() {
-    return {
-      // 在这里定义组件的初始数据
-      // tableData: [{
-      //     date: '2016-05-02',
-      //     name: '王小虎',
-      //     province: '上海',
-      //     city: '普陀区',
-      //     address: '上海市普陀区金沙江路 1518 弄',
-      //     zip: 200333,
-      //     tag: '家'
-      //   }, {
-      //     date: '2016-05-04',
-      //     name: '王小虎',
-      //     province: '上海',
-      //     city: '普陀区',
-      //     address: '上海市普陀区金沙江路 1517 弄',
-      //     zip: 200333,
-      //     tag: '公司'
-      //   }, {
-      //     date: '2016-05-01',
-      //     name: '王小虎',
-      //     province: '上海',
-      //     city: '普陀区',
-      //     address: '上海市普陀区金沙江路 1519 弄',
-      //     zip: 200333,
-      //     tag: '家'
-      //   }, {
-      //     date: '2016-05-03',
-      //     name: '王小虎',
-      //     province: '上海',
-      //     city: '普陀区',
-      //     address: '上海市普陀区金沙江路 1516 弄',
-      //     zip: 200333,
-      //     tag: '公司'
-      //   }],
-        tableData: store.searchData,
-    };
-  },
-  computed: {
-    // 在这里定义计算属性
-  },
-  methods: {
-    // 在这里定义方法
-    indexMethod(index) {
-      return index * 2;
-    }
-  },
-  created() {
-    // 在这里执行组件创建后的逻辑
-  },
-  mounted() {
-    // 在这里执行组件挂载到 DOM 后的逻辑
-  },
-};
+ 
+
+
+
+
+  }  
+ 
 </script>
 
 <style lang="scss" scoped>
-.footer {
-  /* 在这里添加你的 CSS 样式 */
+
+.row{
+  // background-color: pink;
+  width: 1200px;
+  height: 400px;
+}
+.row1{
+  // background-color:yellowgreen;
+  width: 1200px;
+  height: 400px;
 }
 </style>
