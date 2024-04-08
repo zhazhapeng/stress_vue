@@ -1,5 +1,5 @@
 <template>
-  <v-chart class="chart" :option="option" autoresize />
+  <!-- <v-chart class="chart" :option="option" autoresize /> -->
   <v-chart class="chart" :option="option2" autoresize />
 </template>
 
@@ -23,6 +23,7 @@ use([
   TitleComponent,
   TooltipComponent,
   LegendComponent,
+  GridComponent
 ]);
 
 // provide(THEME_KEY, 'dark');
