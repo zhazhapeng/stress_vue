@@ -8,7 +8,7 @@
         <div class="card-body text-des">Here, we provide an advanced search content for users, and you can combine two or more keywords to perform a more accurate search. For example: gene + condition ("WRKY" AND "quad/WT"), etc.</div>
         <div class="card-body">
           <!-- Advanced search -->
-          <form id="advance_search_form" action="result.php" method="post" onSubmit="return check_advance_search_form()">
+          <form id="advance_search_form">
             <input type="hidden" name="type" value="search">
   
             <div class="row">
@@ -19,8 +19,8 @@
                   <option value="proid uniprotaccs">Protein Accession</option>
                   <option value="genename">Gene Name</option>
                   <option value="proteinname">Protein Name</option>
-                  <option value="func">Function</option>
-                  <option value="con">Condition</option>
+                  <option value="function">Function</option>
+                  <option value="condition">Condition</option>
                 </select>
               </div>
               <div class="col-md-6">
@@ -41,11 +41,11 @@
               <div class="col-md-2">
                 <select class="form-control my-select-tag" id="simple_search_tag1" name="simple_search_tag1">
                   <option value="Context">Any Field</option>
-                  <option value="proid uniprotaccs">Protein Accession</option>
+                  <option value="protein accession">Protein Accession</option>
                   <option value="genename">Gene Name</option>
                   <option value="proteinname">Protein Name</option>
-                  <option value="func">Function</option>
-                  <option value="con">Condition</option>
+                  <option value="function">Function</option>
+                  <option value="condition">Condition</option>
                 </select>
               </div>
               <div class="col-md-6">
@@ -71,8 +71,8 @@
                   <option value="proid uniprotaccs">Protein Accession</option>
                   <option value="genename">Gene Name</option>
                   <option value="proteinname">Protein Name</option>
-                  <option value="func">Function</option>
-                  <option value="con">Condition</option>
+                  <option value="function">Function</option>
+                  <option value="condition">Condition</option>
                 </select>
               </div>
               <div class="col-md-6">
@@ -164,13 +164,13 @@
                 </select>
               </div>
               <div class="col-md-2">
-                <button type="button" class="form-control btn btn-warning" id="Example">Example</button>
+                <button type="button" @click="Select()" class="form-control btn btn-warning" id="Example">Example</button>
               </div>
               <div class="col-md-2">
-                <button type="reset" class="form-control btn btn-warning">Clear</button>
+                <button type="reset" @click="reset()" class="form-control btn btn-warning">Clear</button>
               </div>
               <div class="col-md-2">
-                <button type="submit" class="form-control btn btn-warning">Submit</button>
+                <button @click="searchData()" class="form-control btn btn-warning">Submit</button>
               </div>
             </div>
           </form>
@@ -185,7 +185,7 @@
         <div class="card-body text-des">Here, we provide an blast search content for users, and you can input a protein sequence and search the result.</div>
         <div class="card-body">
           <!-- Blast search -->
-          <form id="blast_search_form" action="blast.php" method="post" onSubmit="return check_blast_search_form()">
+          <form id="blast_search_form" action="blast.php" method="post" >
             <input type="hidden" name="type" value="blast">
             <div class="row">
               <div class="col-md-1"></div>
@@ -210,13 +210,13 @@
             <div class="row">
               <div class="col-md-5"></div>
               <div class="col-md-2">
-                <button type="button" class="form-control btn btn-warning" id="Example2">Example</button>
+                <button class="form-control btn btn-warning" id="Example2">Example</button>
               </div>
               <div class="col-md-2">
-                <button type="reset" class="form-control btn btn-warning">Clear</button>
+                <button  class="form-control btn btn-warning">Clear</button>
               </div>
               <div class="col-md-2">
-                <button type="submit" class="form-control btn btn-warning">Submit</button>
+                <button  class="form-control btn btn-warning">Submit</button>
               </div>
             </div>
           </form>
@@ -227,10 +227,68 @@
   </section><!-- End Main -->
 </template>
 
-<script setup>
-// 在这里添加你的 JS 逻辑，如 props 的定义、组件的方法等
+<script>
+import { store } from '../store.js'
+export default {
+  name: "Welcome",
+  data() {
+    return {
+      
+    }
+  },
+
+  methods: {
+    Select() {
+      console.log("randomSelect");
+       document.getElementById("simple_search_tag0").value="proteinname";
+       document.getElementById("simple_search_tag1").value="condition";
+       
+      
+      
+      document.getElementById("simple_search_input0").value = "MADS23";
+      document.getElementById("simple_search_input1").value = "control";
+      
+    },
+    reset() {
+      let options1 = document.getElementById("simple_search_tag0").options;
+      // let inputVal = document.getElementById("simple_search_input0").value;
+      let options3 = document.getElementById("simple_search_org").options;
+      let options4 = document.getElementById("simple_search_mod").options;
+      document.getElementById("simple_search_input0").value = "";
+      options1[0].selected = true;
+      options3[0].selected = true;
+      options4[0].selected = true;
+    },
+    searchData(){
+      let field1 = document.getElementById("simple_search_tag0").value;
+      let field2 =document.getElementById("simple_search_tag1").value;
+      let name=document.getElementById("simple_search_input0").value;
+      let field3=document.getElementById("simple_search_input1").value;
+      let organisms = document.getElementById("simple_search_org").value;
+      let modifications = document.getElementById("simple_search_mod").value;
+
+      this.$axios.post("/search", {
+        data: {
+          field1,
+          field2,
+          field3,
+          name,
+          organisms,
+          modifications
+        }}).then(res =>{
+          // 跳转到result页面,需要把查询到的信息塞到result页面里
+          console.log(res,'------res');
+          store.SetSearchData(res.data);
+          this.$router.push('/result');
+        })
+
+    }
+  }
+}
+  
 </script>
 
-<style scoped>
+<style >
 /* 在这里添加你的 CSS 样式 */
+
 </style>

@@ -6,6 +6,7 @@ import Footer from './components/Footer.vue'
 </script>
 
 <template>
+
   <!-- <header>
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
@@ -16,6 +17,7 @@ import Footer from './components/Footer.vue'
       </nav>
     </div>
   </header> -->
+
   <Header />
   <RouterView />
   <Footer />

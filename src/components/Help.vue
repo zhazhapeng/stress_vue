@@ -3,16 +3,16 @@
     <section id="main" class="d-flex justify-cntent-center align-items-center">
       <div class="container" id="help">
         <div class="row">
-          <div class="col-md-4">
-            <div id="help-navigation" class="card">
+          <div class="col-md-4 "  >
+            <div id="help-navigation" class="card" >
               <div class="card-header">
                 <h5 class="font-weight-bold">Navigation</h5>
               </div>
               <nav class="navbar navbar-light">
                 <nav class="nav nav-pills flex-column">
                   <a class="nav-link" href="#help1">What is qPTMplants</a>
-                  <a class="nav-link" href="#help2">How to use qPTMplants</a>
-                  <nav class="nav nav-pills flex-column hidden">
+                  <a class="nav-link" href="#help2"  >How to use qPTMplants</a>
+                  <nav class="nav nav-pills flex-column hidden" v-show="isDivVisible" >
                     <a class="nav-link ml-3 my-1" href="#help2-1"
                       >Quick Search</a
                     >
@@ -25,7 +25,7 @@
                   <a class="nav-link" href="#help3"
                     >Post-translational modifications resources in plants</a
                   >
-                  <nav class="nav nav-pills flex-column hidden">
+                  <nav class="nav nav-pills flex-column hidden" v-show="isDivVisible">
                     <a class="nav-link ml-3 my-1" href="#help3-1">PhosPhAt</a>
                     <a class="nav-link ml-3 my-1" href="#help3-2">P³DB</a>
                     <a class="nav-link ml-3 my-1" href="#help3-3"
@@ -44,7 +44,7 @@
           </div>
 
           <div class="col-md-8" id="navigation-body">
-            <div class="card">
+            <div class="card"  >
               <div class="card-header">
                 <h5 class="font-weight-bold" id="help1">What is qPTMplants</h5>
               </div>
@@ -421,27 +421,72 @@ export default {
     // 在这里注册任何子组件
   },
   data() {
-    return {
-      // 在这里定义组件的初始数据
-    };
+    return {  
+      // 控制div是否可见的布尔值  
+      isDivVisible: false,  
+      // 滚动触发的阈值（页面滚动到这个高度时，div将展开）  
+      scrollThreshold: 20, // 例如，500px  
+    };  
   },
   computed: {
     // 在这里定义计算属性
   },
   methods: {
     // 在这里定义方法
+    handleScroll() {  
+      const scrollTop = window.scrollY || document.documentElement.scrollTop;  
+      // 当滚动高度达到阈值时，显示div  
+      if (scrollTop >= this.scrollThreshold) {  
+        this.isDivVisible = true;  
+      } else {  
+        // 可以选择是否在滚动回去时隐藏div  
+        this.isDivVisible = false;  
+      }  
+    },  
+    
   },
   created() {
     // 在这里执行组件创建后的逻辑
   },
-  mounted() {
-    // 在这里执行组件挂载到 DOM 后的逻辑
-  },
+  mounted() {  
+    // 添加滚动事件监听器  
+    window.addEventListener('scroll', this.handleScroll);  
+  },  
+  beforeDestroy() {  
+    // 移除滚动事件监听器  
+    window.removeEventListener('scroll', this.handleScroll);  
+  },  
+ 
+  
 };
 </script>
 
 <style lang="scss" scoped>
-.footer {
-  /* 在这里添加你的 CSS 样式 */
+p{
+  color: black;
 }
-</style>
+
+ 
+.collapsible-div {  
+  /* 折叠时的样式 */  
+  height: 0;  
+  overflow: hidden;  
+  transition: height 0.3s ease;  
+}  
+  
+.collapsible-div.v-enter-active,  
+.collapsible-div.v-leave-active {  
+  transition: height 0.3s ease;  
+}  
+  
+.collapsible-div.v-enter,  
+.collapsible-div.v-leave-to {  
+  height: 0;  
+}  
+  
+/* 展开时的样式 */  
+.collapsible-div.visible {  
+  height: auto; /* 或者指定一个具体的高度 */  
+}  
+
+</style> 
