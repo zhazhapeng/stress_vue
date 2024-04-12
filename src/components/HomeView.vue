@@ -2,7 +2,7 @@
   <div class="welcome">
     <div class="row text-center">
       <div class="col-md-12">
-        <h2 class="animate animate__fadeInDown">Welcome to <span>qPTMplants</span></h2>
+        <h2 class="animate animate__fadeInDown">Welcome to <span>ASPTMcxxxxxx</span></h2>
         <p class="animate animate__fadeInLeft">
           Post-translational modification (<span class="des-highlight">PTM</span
           >) is a biochemical process that changes the properties and extends
@@ -17,7 +17,8 @@
           events.
         </p>
         <p class="animate animate__fadeInLeft">
-          Here, we developed an integrative database of quantitative PTMs in
+          Here, we developed an integrative database of PTMs in plants under stress named ASPTM, which curated and hosted the published 31 types of Stress including 261,389 sites on 92,900proteins in 58 plant species from 111 literature. 
+          <!-- Here, we developed an integrative database of quantitative PTMs in
           plants named <span class="des-webname">qPTMplants</span>, which
           curated and hosted the published <span class="des-num">23</span> types
           of PTMs including <span class="des-num">429,821</span> sites on
@@ -27,7 +28,7 @@
           and organized <span class="des-num">620,509</span> kinds of
           quantitative events for <span class="des-num">136,700</span> sites on
           <span class="des-num">55,361</span> proteins from
-          <span class="des-num">139</span> literature.
+          <span class="des-num">139</span> literature. -->
         </p>
       </div>
     </div>
@@ -50,7 +51,7 @@
             <option value="proid uniprotaccs">Protein Accession</option>
             <option value="genename">Gene Name</option>
             <option value="proteinname">Protein Name</option>
-            <option value="func">Function</option>
+            <option value="stress">Stress</option>
             <option value="con">Condition</option>
           </select>
         </div>
@@ -58,7 +59,7 @@
           <input
             class="form-control"
             type="text"
-            placeholder="e.g. WRKY"
+            placeholder="e.g.MADS23"
             id="simple_search_input0"
             name="simple_search_input0"
           />
@@ -200,12 +201,12 @@ export default {
   },
   methods: {
     randomSelect() {
-      console.log("randomSelect");
+      // console.log("randomSelect");
       let options1 = document.getElementById("simple_search_tag0").options;
       let options3 = document.getElementById("simple_search_org").options;
       let options4 = document.getElementById("simple_search_mod").options;
       // 随机选择
-      console.log(options1,'------');
+      // console.log(options1,'------');
       let randomSeed = Math.floor(Math.random() * options1.length);
       options1[randomSeed].selected = true;
       options3[randomSeed].selected = true;
@@ -237,7 +238,8 @@ export default {
         }}).then(res =>{
           // 跳转到result页面,需要把查询到的信息塞到result页面里
           console.log(res,'------res');
-          store.SetSearchData(res.data);
+
+          store.SetSearchData(res);
           this.$router.push('/result');
         })
 
@@ -245,54 +247,59 @@ export default {
   }
 }
 </script>
-<style scoped>
-@media (min-width: 1024px) {
-  .text-center {
-    color: aquamarine;
 
-    p{
-      color: aquamarine;
-    }
-  }
-  .animate{
-    animation-duration: 1s;
+<!-- // @media (min-width: 1024px)  -->
+<style lang="scss" scoped>
+  .row {
+
+      .text-center {
+        .animate__fadeInLeft{
+          color: aquamarine;
+        }
+      }
+      p{
+        color: aquamarine;
+      }
+      .animate{
+        animation-duration: 1s;
+      }
+    
+      i {
+        top: calc(50% - 25px);
+        left: -26px;
+        position: absolute;
+        border: 1px solid var(--color-border);
+        background: var(--color-background);
+        border-radius: 8px;
+        width: 50px;
+        height: 50px;
+      }
+    
+      .item:before {
+        content: " ";
+        border-left: 1px solid var(--color-border);
+        position: absolute;
+        left: 0;
+        bottom: calc(50% + 25px);
+        height: calc(50% - 25px);
+      }
+    
+      .item:after {
+        content: " ";
+        border-left: 1px solid var(--color-border);
+        position: absolute;
+        left: 0;
+        top: calc(50% + 25px);
+        height: calc(50% - 25px);
+      }
+    
+      .item:first-of-type:before {
+        display: none;
+      }
+    
+      .item:last-of-type:after {
+        display: none;
+      }
   }
 
-  i {
-    top: calc(50% - 25px);
-    left: -26px;
-    position: absolute;
-    border: 1px solid var(--color-border);
-    background: var(--color-background);
-    border-radius: 8px;
-    width: 50px;
-    height: 50px;
-  }
-
-  .item:before {
-    content: " ";
-    border-left: 1px solid var(--color-border);
-    position: absolute;
-    left: 0;
-    bottom: calc(50% + 25px);
-    height: calc(50% - 25px);
-  }
-
-  .item:after {
-    content: " ";
-    border-left: 1px solid var(--color-border);
-    position: absolute;
-    left: 0;
-    top: calc(50% + 25px);
-    height: calc(50% - 25px);
-  }
-
-  .item:first-of-type:before {
-    display: none;
-  }
-
-  .item:last-of-type:after {
-    display: none;
-  }
-}
 </style>

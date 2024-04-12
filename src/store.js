@@ -1,9 +1,10 @@
 import { reactive } from "vue";
 
 export const store = reactive({
-  searchData:[],
+  searchResult:null,
 
   SetSearchData(val) {
-    this.searchData = val;
+    this.searchResult = val;
+    console.log(this.searchResult, '----storeVal')
   }
 });

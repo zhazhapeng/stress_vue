@@ -10,8 +10,8 @@
               </div>
               <nav class="navbar navbar-light">
                 <nav class="nav nav-pills flex-column">
-                  <a class="nav-link" href="#help1">What is qPTMplants</a>
-                  <a class="nav-link" href="#help2"  >How to use qPTMplants</a>
+                  <a class="nav-link" href="#help1">What is ASTPM</a>
+                  <a class="nav-link" href="#help2"  >How to use ASTPM</a>
                   <nav class="nav nav-pills flex-column hidden" v-show="isDivVisible" >
                     <a class="nav-link ml-3 my-1" href="#help2-1"
                       >Quick Search</a
@@ -46,11 +46,11 @@
           <div class="col-md-8" id="navigation-body">
             <div class="card"  >
               <div class="card-header">
-                <h5 class="font-weight-bold" id="help1">What is qPTMplants</h5>
+                <h5 class="font-weight-bold" id="help1">What is ASPTM</h5>
               </div>
               <div class="card-body">
                 <p class="card-text text-des">
-                  We developed the qPTMplants, an integrative database of
+                  We developed the ASPTM, an integrative database of
                   quantitative post-translational modifications in plants, which
                   curated and hosted the published 23 types of PTMs including
                   429,821 sites on 123,551 proteins in 43 plant species from 293
@@ -68,13 +68,13 @@
             <div class="card">
               <div class="card-header">
                 <h5 class="font-weight-bold" id="help2">
-                  How to use qPTMplants
+                  How to use ASPTM
                 </h5>
               </div>
               <div class="card-body">
                 <h5 class="card-title text-info" id="help2-1">Quick Search</h5>
                 <p class="card-text text-des">
-                  In the home page of qPTMplants, users can specify one field or
+                  In the home page of ASPTM, users can specify one field or
                   all the fields to perform a quick search with the keyword(s)
                   in the field(s). Users can simply click example and submit
                   buttons to perform an example search.

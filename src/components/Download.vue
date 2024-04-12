@@ -312,7 +312,10 @@
                 <div class="col-md-1">
                   <input type="text" id="msg" name="msg" value="">
                 </div>
-                <div class="col-md-2"><button type="submit" class="form-control btn btn-warning">Submit</button></div>
+                <div class="col-md-2">
+                  <button @click="downloadTableData">Download</button>
+                  <button type="submit" class="form-control btn btn-warning">Submit</button>
+                </div>
             </div>
 
           </form>     
@@ -341,6 +344,30 @@ export default {
   },
   methods: {
     // 在这里定义方法
+    async downloadData() {  
+      try {  
+        const response = await fetch('/download-data'); // 后端 API 端点  
+  
+        if (!response.ok) {  
+          throw new Error('Network response was not ok.');  
+        }  
+  
+        const blob = await response.blob();  
+        const url = window.URL.createObjectURL(blob);  
+        const link = document.createElement('a');  
+        link.href = url;  
+        link.setAttribute('download', 'database_data.txt'); // 设置文件名  
+        document.body.appendChild(link);  
+        link.click();  
+  
+        // 清理  
+        window.URL.revokeObjectURL(url);  
+        document.body.removeChild(link);  
+      } catch (error) {  
+        console.error('Error downloading data:', error);  
+        alert('无法下载数据，请稍后再试。');  
+      }  
+    }  
   },
   created() {
     // 在这里执行组件创建后的逻辑

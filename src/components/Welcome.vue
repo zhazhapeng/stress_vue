@@ -50,8 +50,9 @@
             <option value="proid uniprotaccs">Protein Accession</option>
             <option value="genename">Gene Name</option>
             <option value="proteinname">Protein Name</option>
-            <option value="func">Function</option>
+            <option value="stress">Stress</option>
             <option value="con">Condition</option>
+          
           </select>
         </div>
         <div class="col-md-6">

@@ -3,15 +3,15 @@
      <!-- 顶部开始 -->
      <div class="top">
         <div class="center top_c">
-            <i>
+           <i>
                 integrative database of
-                <span>q</span>uantitative 
+                <span>A</span>biotic
+                <span>S</span>tress-responsive
                 <span>P</span>ost-
                 <span>T</span>ranslational
                 <span>M</span>odifications in
                 <span>plants</span> 
-                <span>under</span>
-                <span>stress</span>
+                
             </i>
         </div>
     </div>
