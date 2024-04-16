@@ -4,7 +4,7 @@
     
     <div class="result-header card-h">Result</div> 
     <div class="result-header alert-p">{{resultText }}</div>
-    <div class="result-header alert-s">There are 1168 entries with your keyword(s).</div>
+    <div class="result-header alert-s">There are {{Array.length}} entries with your keyword(s).</div>
     <button style="margin: 20px 0 20px 1000px;" @click="downloadTableData">Download</button>
     
     <el-button @click="clearFilter" style="margin-bottom:20px ;">清除所有筛选条件</el-button>
@@ -17,7 +17,7 @@
           <div class="result_button">
           <button @click="toggleDiv('1')">About experiment</button>
           <button @click="toggleDiv('2')">About protein</button>
-          <button @click="toggleDiv('3')">Sequence and Structure</button>
+          <!-- <button @click="toggleDiv('3')">Sequence and Structure</button> -->
           </div>
           
         <div  v-show="isDiv1Visible == 1">
@@ -26,43 +26,43 @@
           
           <el-form-item class="vertically-align" label="Condition" >
             
-            <span class="vertically-align a">{{ props.row.Conditiondetail }}</span>
+            <span class="vertically-align a">{{ props.row.Condition }}</span>
           </el-form-item>
-          <el-form-item class="vertically-align" label="Sample type">
-            <span class="vertically-align a">{{ props.row.Sampletype }}</span>
+          <el-form-item class="vertically-align" label="Sample">
+            <span class="vertically-align a">{{ props.row.Sample }}</span>
           </el-form-item>
           <el-form-item class="vertically-align" label="Enrichment method">
-            <span class="vertically-align a">{{ props.row.Sampletype }}</span>
+            <span class="vertically-align a">{{ props.row.Enrichmentmethod }}</span>
           </el-form-item>
           <el-form-item class="vertically-align" label="Mass spectrometer">
-            <span class="vertically-align a">{{ props.row.Sampletype }}</span>
+            <span class="vertically-align a">{{ props.row.Massspectrometer }}</span>
           </el-form-item>
           <el-form-item class="vertically-align" label="Search database">
-            <span class="vertically-align a">{{ props.row.Sampletype }}</span>
+            <span class="vertically-align a">{{ props.row.Searchdatabase }}</span>
           </el-form-item>
           <el-form-item class="vertically-align" label="FDR">
-            <span class="vertically-align a">{{ props.row.Sampletype }}</span>
+            <span class="vertically-align a">{{ props.row.FDR }}</span>
           </el-form-item>
           <el-form-item class="vertically-align" label="Precursor mass tolerance">
-            <span class="vertically-align a">{{ props.row.Sampletype }}</span>
+            <span class="vertically-align a">{{ props.row.Precursormasstolerance }}</span>
           </el-form-item>
           <el-form-item class="vertically-align" label="Protease">
-            <span class="vertically-align a">{{ props.row.Sampletype }}</span>
+            <span class="vertically-align a">{{ props.row.Protease }}</span>
           </el-form-item>
           <el-form-item class="vertically-align" label="Variable modifications">
-            <span class="vertically-align a">{{ props.row.Sampletype }}</span>
+            <span class="vertically-align a">{{ props.row.Variablemodifications }}</span>
           </el-form-item>
           <el-form-item class="vertically-align" label="Fixed modification">
-            <span class="vertically-align a">{{ props.row.Sampletype }}</span>
+            <span class="vertically-align a">{{ props.row.Fixedmodification}}</span>
           </el-form-item>
           <el-form-item class="vertically-align" label="Decoy strategy">
-            <span class="vertically-align a">{{ props.row.Sampletype }}</span>
+            <span class="vertically-align a">{{ props.row.Decoystrategy}}</span>
           </el-form-item>
           <el-form-item class="vertically-align" label="Raw peptide">
-            <span class="vertically-align a">{{ props.row.Sampletype }}</span>
+            <span class="vertically-align a">{{ props.row.Rawpeptide }}</span>
           </el-form-item>
           <el-form-item class="vertically-align" label="PRIDE accession" >
-            <span class="vertically-align a">{{ props.row.Rawpeptide }}</span>
+            <span class="vertically-align a">{{ props.row.PRIDEaccession }}</span>
           </el-form-item>
           <el-form-item class="vertically-align" label="Resource">
             <span class="vertically-align a">{{ props.row.Resource }}</span>
@@ -72,20 +72,21 @@
       </div>
      
       <div v-show="isDiv1Visible == 2">
-          
         <el-form label-position="left" inline class="demo-table-expand " style="display: flex; flex-direction: column; ">
   
           <el-form-item class="vertically-align" label="Uniprot accession">
-            <span class="vertically-align">{{ props.row.From }}</span>
+            <span class="vertically-align" > <a  class="blue-link" @click="goOut1(props.row.ProteinID)">
+              
+              {{ props.row.ProteinID }}</a></span>
           </el-form-item>
           <el-form-item class="vertically-align" label="Entrez ID">
-            <span class="vertically-align">{{ props.row.GeneID }}</span>
+            <span class="vertically-align"><a  class="blue-link" @click="goOut2(props.row.GeneID)">{{ props.row.GeneID }}</a></span>
           </el-form-item>
           <el-form-item class="vertically-align" label="Genbank protein ID">
-            <span class="vertically-align">{{ props.row.RefSeq }}</span>
+            <span class="vertically-align"><a  class="blue-link" @click="goOut3(props.row.RefSeq)">{{ props.row.RefSeq }}</a></span>
           </el-form-item>
           <el-form-item class="vertically-align" label="Genbank nucleotide ID">
-            <span class="vertically-align">{{ props.row.Sampletype }}</span>
+            <span class="vertically-align"><a  class="blue-link" @click="goOut4(props.row.GenbankID)">{{ props.row.GenbankID }}</a></span>
           </el-form-item>
           
           <el-form-item class="vertically-align" label="Protein names">
@@ -98,7 +99,7 @@
             <span class="vertically-align">{{ props.row.Organism }}</span>
           </el-form-item>
           <el-form-item class="vertically-align" label="OrganismID">
-            <span class="vertically-align"><a  @click="goOut(props.row.OrganismID)">{{ props.row.OrganismID}}</a></span>
+            <span class="vertically-align"><a class="blue-link " @click="goOut(props.row.OrganismID)">{{ props.row.OrganismID}}</a></span>
           </el-form-item>
           <el-form-item class="vertically-align" label="Function">
             <span class="vertically-align">{{ props.row.Function }}</span>
@@ -111,54 +112,7 @@
           </el-form>
       </div>
 
-      <div v-show="isDiv1Visible == 3">
-          
-          <el-form label-position="left" inline class="demo-table-expand">
-    
-            <el-form-item label="Conditiondetail">
-              <span class="vertically-align">{{ props.row.Conditiondetail }}</span>
-            </el-form-item>
-            <el-form-item label="Sample type333333">
-              <span>{{ props.row.Sampletype }}</span>
-            </el-form-item>
-            <el-form-item label="Enrichment method">
-              <span>{{ props.row.Sampletype }}</span>
-            </el-form-item>
-            <el-form-item label="Mass spectrometer">
-              <span>{{ props.row.Sampletype }}</span>
-            </el-form-item>
-            <el-form-item label="Search database">
-              <span>{{ props.row.Sampletype }}</span>
-            </el-form-item>
-            <el-form-item label="FDR">
-              <span>{{ props.row.Sampletype }}</span>
-            </el-form-item>
-            <el-form-item label="Precursor mass tolerance">
-              <span>{{ props.row.Sampletype }}</span>
-            </el-form-item>
-            <el-form-item label="Protease">
-              <span>{{ props.row.Sampletype }}</span>
-            </el-form-item>
-            <el-form-item label="Variable modifications">
-              <span>{{ props.row.Sampletype }}</span>
-            </el-form-item>
-            <el-form-item label="Fixed modification">
-              <span>{{ props.row.Sampletype }}</span>
-            </el-form-item>
-            <el-form-item label="Decoy strategy">
-              <span>{{ props.row.Sampletype }}</span>
-            </el-form-item>
-            <el-form-item label="Raw peptide">
-              <span>{{ props.row.Sampletype }}</span>
-            </el-form-item>
-            <el-form-item label="PRIDE accession" >
-              <span>{{ props.row.Rawpeptide }}</span>
-            </el-form-item>
-            <el-form-item label="Resource">
-              <span >{{ props.row.Resource }}</span>
-            </el-form-item>
-            </el-form>
-        </div>
+      
       </template>
       </el-table-column >
       <!-- <el-table-column >
@@ -168,7 +122,7 @@
     </el-table-column> -->
      
       <el-table-column  label="Protein ID" prop="ProteinID" min-width="150":filters="getFiltersForColumn('ProteinID')" :filter-method="filterHandler"> </el-table-column>
-      <el-table-column label="Gene name" prop="GeneName" min-width="180" :filters="getFiltersForColumn('GeneName')" :filter-method="filterHandler"></el-table-column>
+      <el-table-column label="Gene name" prop="Genename" min-width="180" :filters="getFiltersForColumn('GeneName')" :filter-method="filterHandler"></el-table-column>
       <el-table-column label="Position" prop="Position" min-width="100" column-key="position" :filters="getFiltersForColumn('Position')" :filter-method="filterHandler"></el-table-column>
       <el-table-column label="stress" prop="stress" min-width="120" :filters="getFiltersForColumn('stress')" :filter-method="filterHandler"> </el-table-column>
       <el-table-column label="Modification" prop="Modification" min-width="150" :filters="getFiltersForColumn('Modification')" :filter-method="filterHandler"> </el-table-column>
@@ -228,66 +182,55 @@ export default {
         isDiv2Visible: false ,
         isDiv3Visible: false ,
 
-      //输入框的变量
-        input1: '',  
-        input2: '',  
-        input3: '',  
-        input4: '',  
-        input5: '',
-        input6: '',  
-        input7: '',  
-        input8: '',  
-        input9: '',  
-        input10: '',
-//
+      
 
 
       tableData:[],
       // 在这里定义组件的初始数据
-      option: {
-        title: {
-          text: "Traffic Sources",
-          left: "center",
-        },
-        tooltip: {
-          trigger: "item",
-          formatter: "{a} <br/>{b} : {c} ({d}%)",
-        },
-        legend: {
-          orient: "vertical",
-          left: "left",
-          data: [
-            "Direct",
-            "Email",
-            "Ad Networks",
-            "Video Ads",
-            "Search Engines",
-          ],
-        },
-        series: [
-          {
-            name: "Traffic Sources",
-            type: "pie",
-            radius: "55%",
-            // 饼图中心位置相对整个画布
-            center: ["50%", "60%"],
-            data: [
-              { value: 335, name: "Direct" },
-              { value: 310, name: "Email" },
-              { value: 234, name: "Ad Networks" },
-              { value: 135, name: "Video Ads" },
-              { value: 1548, name: "Search Engines" },
-            ],
-            emphasis: {
-              itemStyle: {
-                shadowBlur: 10,
-                shadowOffsetX: 0,
-                shadowColor: "rgba(0, 0, 0, 0.5)",
-              },
-            },
-          },
-        ],
-      },
+      // option: {
+      //   title: {
+      //     text: "Traffic Sources",
+      //     left: "center",
+      //   },
+      //   tooltip: {
+      //     trigger: "item",
+      //     formatter: "{a} <br/>{b} : {c} ({d}%)",
+      //   },
+      //   legend: {
+      //     orient: "vertical",
+      //     left: "left",
+      //     data: [
+      //       "Direct",
+      //       "Email",
+      //       "Ad Networks",
+      //       "Video Ads",
+      //       "Search Engines",
+      //     ],
+      //   },
+      //   series: [
+      //     {
+      //       name: "Traffic Sources",
+      //       type: "pie",
+      //       radius: "55%",
+      //       // 饼图中心位置相对整个画布
+      //       center: ["50%", "60%"],
+      //       data: [
+      //         { value: 335, name: "Direct" },
+      //         { value: 310, name: "Email" },
+      //         { value: 234, name: "Ad Networks" },
+      //         { value: 135, name: "Video Ads" },
+      //         { value: 1548, name: "Search Engines" },
+      //       ],
+      //       emphasis: {
+      //         itemStyle: {
+      //           shadowBlur: 10,
+      //           shadowOffsetX: 0,
+      //           shadowColor: "rgba(0, 0, 0, 0.5)",
+      //         },
+      //       },
+      //     },
+      //   ],
+      // },
       searchResult: store.searchResult,
       
     };
@@ -314,7 +257,28 @@ export default {
       
       window.location.href ='https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?lvl=0&id='+val;
     },
+
+    goOut1(val){
+      console.log('id是:',val);
       
+      window.location.href ='https://www.uniprot.org/uniprotkb?query='+val;
+    },
+    goOut2(val){
+      console.log('id是:',val);
+      
+      window.location.href ='https://www.ncbi.nlm.nih.gov/gene/'+val;
+    },
+    goOut3(val){
+      console.log('id是:',val);
+      
+      window.location.href ='https://www.ncbi.nlm.nih.gov/protein/'+val;
+    },
+    goOut4(val){
+      console.log('id是:',val);
+      
+      window.location.href ='https://www.ncbi.nlm.nih.gov/nuccore/'+val;
+    },
+    
       handleExpandChange(row, expanded) {  
       // 处理展开行变化时的逻辑，如果需要的话  
       },  
@@ -485,6 +449,11 @@ button:focus{
   line-height: 45px;
   background-color:yellowgreen;
 } */
+.blue-link {  
+    color:#007bff; /* 设置字体颜色为蓝色 */  
+    text-decoration: none; /* 移除默认的下划线 */  
+    cursor: pointer; /* 设置鼠标样式为小手 */  
+}
 button{
     color:white;
     background-color:rgba(23,162,184,.5);

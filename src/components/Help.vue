@@ -51,12 +51,14 @@
               <div class="card-body">
                 <p class="card-text text-des">
                   We developed the ASPTM, an integrative database of
-                  quantitative post-translational modifications in plants, which
-                  curated and hosted the published 23 types of PTMs including
-                  429,821 sites on 123,551 proteins in 43 plant species from 293
-                  literature. Moreover, we collected and organized 620,509 kinds
-                  of quantitative events for 136,700 sites on 55,361 proteins
-                  from 139 literature. The detailed information about the PTM
+                  quantitative post-translational modifications in plants under stress, which
+                  curated and hosted the published 31 types of stress including
+                  261,389 sites on 92,900 proteins in 58 plant species from 111
+                  HTE literature.There are also 191 post-translational modification 
+                  sites of LTE under 27 different stress conditions in 127 references
+                  Moreover, we collected and organized 52,788 kinds
+                  of quantitative events for 12,673 sites on 7,432 proteins
+                  from 46 literature. The detailed information about the PTM
                   events was organized and visualized in detail. In addition,
                   the annotations including the sequence and structural
                   characteristics were orchestrated.
@@ -81,7 +83,7 @@
                 </p>
               </div>
               <img
-                src="./assets/img/quick_search.png"
+                src="../assets/img/quick_search.png"
                 class="card-img-bottom"
               />
 
@@ -96,11 +98,13 @@
                   the initial and select the term of interest.
                 </p>
               </div>
-              <img src="./assets/img/help_browse.png" class="card-img-bottom" />
+              <img src="../assets/img/help_browse.png" class="card-img-bottom" />
               <img
-                src="./assets/img/help_browse2.png"
+                src="../assets/img/help_browse2.png"
+                
                 class="card-img-bottom"
               />
+              <img src="../assets/img/help_browse3.png" class="card-img-bottom" />
 
               <div class="card-body">
                 <h5 class="card-title text-info" id="help2-3">
@@ -120,9 +124,9 @@
                   program in NCBI BLAST packages.
                 </p>
               </div>
-              <img src="./assets/img/help_search.png" class="card-img-bottom" />
+              <img src="../assets/img/help_search.png" class="card-img-bottom" />
               <img
-                src="./assets/img/help_search2.png"
+                src="../assets/img/help_search2.png"
                 class="card-img-bottom"
               />
 
@@ -135,7 +139,7 @@
                   displayed while users click the 'Detail' button.
                 </p>
               </div>
-              <img src="./assets/img/help_result.png" class="card-img-bottom" />
+              <img src="../assets/img/help_result.png" class="card-img-bottom" />
             </div>
             <br />
 

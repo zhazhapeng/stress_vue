@@ -9,7 +9,7 @@
         <div class="card-body alert-primary">Note: All the field are requied.</div>
         <!--div class="card-body alert-danger">The dataset of qPTMplants will be available for download after it is published!</div-->
         <div class="card-body">
-          <form id="email_form" name="email_form" method="post" action="sendemail.php" onSubmit="return check_email_form()">
+          <form id="email_form" name="email_form" onSubmit="return check_email_form()">
 
             <div class="row">
               <div class="col-md-1"></div>
@@ -292,8 +292,8 @@
               <div class="col-md-2">
                 <label for="dataset">Dataset</label>
                 <select class="form-control" name="dataset" id="dataset">
-                  <option value="qPTMplants">qPTMplants</option>
-                  <option value="qPTMplants2">qPTMplants (labelled PTMs)</option>
+                  <option value="qPTMplants">ASPTM</option>
+                  
                   <!--option value="qPTM">qPTM</option-->
                 </select>
               </div>
@@ -313,14 +313,15 @@
                   <input type="text" id="msg" name="msg" value="">
                 </div>
                 <div class="col-md-2">
-                  <button @click="downloadTableData">Download</button>
+
+                  <button @click="downloadTableData" style="margin-top: 20px;">Download</button>
                   <button type="submit" class="form-control btn btn-warning">Submit</button>
                 </div>
             </div>
 
           </form>     
         </div>
-        <div class="card-footer">qPTMplants is ONLY freely available for academic research. For commercial usage, please <a href="about.php" class='text-danger font-weight-bold'>contact us</a>.</div>
+        <div class="card-footer">ASPTM is ONLY freely available for academic research. For commercial usage, please contact us</div>
       </div>
 
     </div>
@@ -329,6 +330,7 @@
 </template>
 
 <script>
+import axios from 'axios'; 
 export default {
   name: "Footer",
   components: {
@@ -344,30 +346,39 @@ export default {
   },
   methods: {
     // 在这里定义方法
-    async downloadData() {  
+    async downloadTableData() {  
       try {  
-        const response = await fetch('/download-data'); // 后端 API 端点  
+        // 调用后端API获取数据  
+       
+        const response = await  this.$axios.post('/download'); 
+        const data = response.data; // 假设后端返回的数据在response.data中  
   
-        if (!response.ok) {  
-          throw new Error('Network response was not ok.');  
-        }  
+        // 创建blob对象用于下载  
+        const blob = new Blob([data], { type: 'text/plain;charset=utf-8' });  
   
-        const blob = await response.blob();  
-        const url = window.URL.createObjectURL(blob);  
+        // 创建一个用于下载的链接元素  
         const link = document.createElement('a');  
-        link.href = url;  
-        link.setAttribute('download', 'database_data.txt'); // 设置文件名  
+        link.href = window.URL.createObjectURL(blob);  
+        link.download = 'data.txt'; // 设置下载文件名  
+        link.style.display = 'none'; // 隐藏链接元素  
+  
+        // 将链接元素添加到DOM中  
         document.body.appendChild(link);  
+  
+        // 模拟点击链接元素实现下载  
         link.click();  
   
-        // 清理  
-        window.URL.revokeObjectURL(url);  
+        // 下载完成后移除链接元素  
         document.body.removeChild(link);  
       } catch (error) {  
         console.error('Error downloading data:', error);  
-        alert('无法下载数据，请稍后再试。');  
+        // 可以在这里处理错误，比如显示错误信息给用户  
       }  
-    }  
+
+      
+      // let url = `api/getexcel?name='HTE'`;
+      // window.location = url;
+    },  
   },
   created() {
     // 在这里执行组件创建后的逻辑
