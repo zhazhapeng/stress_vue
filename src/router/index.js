@@ -24,9 +24,24 @@ const router = createRouter({
       component: () => import('../components/Browse.vue')
     },
     {
+      path: '/calendar',
+      name: 'calendar',
+      component: () => import('../views/calendar.vue')
+    },
+    {
+      path: '/city',
+      name: 'city',
+      component: () => import('../views/city.vue')
+    },
+    {
       path: '/search',
       name: 'search',
       component: () => import('../components/Search.vue')
+    },
+    {
+      path: '/blast',
+      name: 'blast',
+      component: () => import('../components/Blast.vue')
     },
     {
       path: '/download',

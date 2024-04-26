@@ -237,6 +237,7 @@ export default {
     clickTag(val){
       console.log(val,'clickTag');
       this.modList = [];
+      this.stressList = [];
       // 假设这是服务端提供的数据
       this.$axios.post("/browseChart", {
         data: {

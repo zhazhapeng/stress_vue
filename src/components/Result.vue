@@ -121,7 +121,7 @@
       </template>
     </el-table-column> -->
      
-      <el-table-column  label="Protein ID" prop="ProteinID" min-width="150":filters="getFiltersForColumn('ProteinID')" :filter-method="filterHandler"> </el-table-column>
+      <el-table-column  label="Protein ID" prop="ProteinID" min-width="150" :filters="getFiltersForColumn('ProteinID')" :filter-method="filterHandler"> </el-table-column>
       <el-table-column label="Gene name" prop="Genename" min-width="180" :filters="getFiltersForColumn('GeneName')" :filter-method="filterHandler"></el-table-column>
       <el-table-column label="Position" prop="Position" min-width="100" column-key="position" :filters="getFiltersForColumn('Position')" :filter-method="filterHandler"></el-table-column>
       <el-table-column label="stress" prop="stress" min-width="120" :filters="getFiltersForColumn('stress')" :filter-method="filterHandler"> </el-table-column>

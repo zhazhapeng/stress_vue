@@ -53,7 +53,7 @@
             <option value="Context">Any Field</option>
             <option value="ProteinID">Protein Accession</option>
             <option value="Genename">Gene Name</option>
-            <option value="Proteinnames">Protein Name</option>
+            <!-- <option value="Proteinnames">Protein Name</option> -->
             <option value="stress">Stress</option>
             <option value="Condition">Condition</option>
           </select>
@@ -154,35 +154,24 @@
             id="simple_search_mod"
           >
             <option value="All">All modifications</option>
-            <option value="Carbonylation">Carbonylation</option>
-            <option value="Glycation">Glycation</option>
-            <option value="Lysine 2-hydroxyisobutyrylation">
-              Lysine 2-hydroxyisobutyrylation
-            </option>
-            <option value="Lysine Acetylation">Lysine Acetylation</option>
-            <option value="Lysine Butyrylation">Lysine Butyrylation</option>
-            <option value="Lysine Carbamylation">Lysine Carbamylation</option>
-            <option value="Lysine Crotonylation">Lysine Crotonylation</option>
-            <option value="Lysine Malonylation">Lysine Malonylation</option>
-            <option value="Lysine SUMOylation">Lysine SUMOylation</option>
-            <option value="Lysine Succinylation">Lysine Succinylation</option>
-            <option value="Lysine Ubiquitination">Lysine Ubiquitination</option>
-            <option value="Methylation">Methylation</option>
-            <option value="N-glycosylation">N-glycosylation</option>
-            <option value="N-terminal Acetylation">
-              N-terminal Acetylation
-            </option>
-            <option value="N-terminal Myristoylation">
-              N-terminal Myristoylation
-            </option>
-            <option value="O-GlcNAcylation">O-GlcNAcylation</option>
-            <option value="Oxidation">Oxidation</option>
-            <option value="Persulfidation">Persulfidation</option>
-            <option value="Phosphorylation">Phosphorylation</option>
-            <option value="S-cyanylation">S-cyanylation</option>
-            <option value="S-glutathionylation">S-glutathionylation</option>
             <option value="S-nitrosylation">S-nitrosylation</option>
-            <option value="S-sulfenylation">S-sulfenylation</option>
+            <option value="Phosphorylation">Phosphorylation</option>
+            <option value="Lysine Acetylation">Lysine Acetylation</option>
+            <option value="O-GlcNAcylation">O-GlcNAcylation</option>
+            <option value="Glycation">Glycation</option>
+            <option value="N-terminal Acetylation">N-terminal Acetylation</option>
+            <option value="Lysine SUMOylation">Lysine SUMOylation</option>
+            <option value="Glycation">Glycation</option>
+            <option value="Lysine Crotonylation">Lysine Crotonylation</option>
+            <option value="Lysine Butyrylation">Lysine Butyrylation</option>
+            <option value="Lysine Succinylation">Lysine Succinylation</option>
+            <option value="S-glutathionylation">S-glutathionylation</option>
+            <option value="methylation">methylation</option>
+            <option value="N-glycosylation">N-glycosylation</option>
+            <option value="Glycosylation">Glycosylation</option>
+            <option value="Lysine Ubiquitination">Lysine Ubiquitination</option>
+            <option value="Lysine-2-hydroxyisobutyrylaton">Lysine-2-hydroxyisobutyrylaton</option>
+            <option value="S-Sulfonylation">S-Sulfonylation</option>
           </select>
         </div>
         <div class="col-md-2">
@@ -219,14 +208,14 @@ export default {
     randomSelect() {
       // console.log("randomSelect");
       let options1 = document.getElementById("simple_search_tag0").options;
-      let options3 = document.getElementById("simple_search_org").options;
-      let options4 = document.getElementById("simple_search_mod").options;
-      // 随机选择
-      // console.log(options1,'------');
+      // let options3 = document.getElementById("simple_search_org").options;
+      // let options4 = document.getElementById("simple_search_mod").options;
+      // // 随机选择
+      // // console.log(options1,'------');
       let randomSeed = Math.floor(Math.random() * options1.length);
       options1[1].selected = true;
-      options3[randomSeed].selected = true;
-      options4[randomSeed].selected = true;
+      // options3[randomSeed].selected = true;
+      // options4[randomSeed].selected = true;
       document.getElementById("simple_search_input0").value = "A0A2K3D3L7";
     },
     reset() {
@@ -244,6 +233,11 @@ export default {
       let name = document.getElementById("simple_search_input0").value;
       let organisms = document.getElementById("simple_search_org").value;
       let modifications = document.getElementById("simple_search_mod").value;
+
+      if(field === 'Context'){
+        alert('查询条件1不能为空！');  
+        return;
+      }
 
       this.$axios.post("/search", {
         data: {
@@ -267,7 +261,6 @@ export default {
 <!-- // @media (min-width: 1024px)  -->
 <style lang="scss" scoped>
   .row {
-
       .text-center {
         .animate__fadeInLeft{
           color: black;
