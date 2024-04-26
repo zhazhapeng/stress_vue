@@ -7,8 +7,8 @@
     <div class="result-header alert-s">There are {{Array.length}} entries with your keyword(s).</div>
     <button style="margin: 20px 0 20px 1000px;" @click="downloadTableData">Download</button>
     
-    <el-button @click="clearFilter" style="margin-bottom:20px ;">清除所有筛选条件</el-button>
-    <el-table  ref="filterTable" :data="tableData"  class="my-table"  >
+    <el-button @click="clearFilter" style="margin-bottom:20px ; width: 300px;">Clear all screening conditions</el-button>
+    <el-table   ref="filterTable" :data="tableData"  class="my-table" >
       
       <el-table-column type="expand" @expand-change="handleExpandChange"  >
          
@@ -115,22 +115,16 @@
       
       </template>
       </el-table-column >
-      <!-- <el-table-column >
-        <template #header>
-        <el-input v-model="search" size="mini" class="minisearch" placeholder="输入关键字搜索" />
-      </template>
-    </el-table-column> -->
-     
-      <el-table-column  label="Protein ID" prop="ProteinID" min-width="150":filters="getFiltersForColumn('ProteinID')" :filter-method="filterHandler"> </el-table-column>
-      <el-table-column label="Gene name" prop="Genename" min-width="180" :filters="getFiltersForColumn('GeneName')" :filter-method="filterHandler"></el-table-column>
-      <el-table-column label="Position" prop="Position" min-width="100" column-key="position" :filters="getFiltersForColumn('Position')" :filter-method="filterHandler"></el-table-column>
-      <el-table-column label="stress" prop="stress" min-width="120" :filters="getFiltersForColumn('stress')" :filter-method="filterHandler"> </el-table-column>
-      <el-table-column label="Modification" prop="Modification" min-width="150" :filters="getFiltersForColumn('Modification')" :filter-method="filterHandler"> </el-table-column>
-      <el-table-column label="Sequence window" prop="Sequencewindow" min-width="180" :filters="getFiltersForColumn('Sequencewindow') " :filter-method="filterHandler"> </el-table-column>
-      <el-table-column label="Sample" prop="Sample" min-width="100" :filters="getFiltersForColumn('Sample')" :filter-method="filterHandler"> </el-table-column>
-      <el-table-column label="Condition" prop="Condition" min-width="170" :filters="getFiltersForColumn('Condition')" :filter-method="filterHandler"></el-table-column> 
-      <el-table-column label="Log2ratio" prop="Log2ratio" min-width="120" :filters="getFiltersForColumn('Log2ratio')" :filter-method="filterHandler">  </el-table-column>
-      <el-table-column label="Pvalue" prop="Pvalue" min-width="100" :filters="getFiltersForColumn('Pvalue')" :filter-method="filterHandler"> </el-table-column>
+      <el-table-column  label="Protein ID" prop="ProteinID" min-width="180"  sortable :filters="getFiltersForColumn('ProteinID')" :filter-method="filterHandler"> </el-table-column>
+      <el-table-column label="Gene name" prop="Genename" min-width="180" sortable :filters="getFiltersForColumn('GeneName')" :filter-method="filterHandler"></el-table-column>
+      <el-table-column label="Position" prop="Position" min-width="150" column-key="position" sortable :filters="getFiltersForColumn('Position')" :filter-method="filterHandler"></el-table-column>
+      <el-table-column label="stress" prop="stress" min-width="120" sortable :filters="getFiltersForColumn('stress')" :filter-method="filterHandler"> </el-table-column>
+      <el-table-column label="Modification" prop="Modification" min-width="160" sortable :filters="getFiltersForColumn('Modification')" :filter-method="filterHandler"> </el-table-column>
+      <el-table-column label="Sequence window" prop="Sequencewindow" min-width="190" sortable :filters="getFiltersForColumn('Sequencewindow') " :filter-method="filterHandler"> </el-table-column>
+      <el-table-column label="Sample" prop="Sample" min-width="120" sortable :filters="getFiltersForColumn('Sample')" :filter-method="filterHandler"> </el-table-column>
+      <el-table-column label="Condition" prop="Condition" min-width="170" sortable :filters="getFiltersForColumn('Condition')" :filter-method="filterHandler"></el-table-column> 
+      <el-table-column label="Log2ratio" prop="Log2ratio" min-width="140" sortable :filters="getFiltersForColumn('Log2ratio')" :filter-method="filterHandler">  </el-table-column>
+      <el-table-column label="Pvalue" prop="Pvalue" min-width="120" sortable :filters="getFiltersForColumn('Pvalue')" :filter-method="filterHandler"> </el-table-column>
     </el-table>
     
     <v-chart class="chart" :option="option" autoresize />
@@ -252,6 +246,9 @@ export default {
   },
   methods: {
     // 在这里定义方法
+    formatter(row, column) {
+        return row.ProteinID
+      },
     goOut(val){
       console.log('id是:',val);
       
@@ -349,7 +346,7 @@ export default {
 };
 </script>
 
-<style>
+<style >
 .container {  
   width: 1200px; /* 你可以设置你需要的版心宽度 */  
   margin: 0 auto; /* 水平居中 */  
@@ -526,6 +523,7 @@ button:focus{
 }
 
 
+
 .el-table td {  
   font-family: 'Times New Roman', Times, serif; /* 设置字体 */  
   font-size: 14px; /* 设置字体大小 */  
@@ -541,8 +539,16 @@ button:focus{
   margin-bottom: 0px; 
 }  
 
-::v-deep .el-table-column__header-filter-trigger {  
-  color: #ff0000; /* 筛选器箭头颜色 */  
-  font-size: 18px; /* 筛选器箭头大小 */  
-} 
+
+.el-table__expand-icon {  
+    color: red; /* 设置颜色为红色 */  
+    transform: scale(1.5); /* 放大 1.2 倍，可以根据需要调整 */  
+    
+}
+ 
+.custom-filter-column .el-table-column__filter .el-button {  
+  background-color: red !important;  
+  color: red !important;  
+  border-color: red !important;  
+}
 </style>

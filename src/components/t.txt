@@ -1,11 +1,26 @@
-""," ", "", "","",""," ","","",
+<option value="S-nitrosylation">S-nitrosylation</option>
+<option value="Phosphorylation">Phosphorylation</option>
+<option value="Lysine Acetylation">Lysine Acetylation</option>
+<option value="O-GlcNAcylation">O-GlcNAcylation</option>
+<option value="Glycation">Glycation</option>
+<option value="N-terminal Acetylation">N-terminal Acetylation</option>
+<option value="Lysine SUMOylation">Lysine SUMOylation</option>
+<option value="Glycation">Glycation</option>
+<option value="Lysine Crotonylation">Lysine Crotonylation</option>
+<option value="Lysine Butyrylation">Lysine Butyrylation</option>
+<option value="Lysine Succinylation">Lysine Succinylation</option>
+<option value="S-glutathionylation">S-glutathionylation</option>
+<option value="methylation">methylation</option>
+<option value="N-glycosylation">N-glycosylation</option>
+<option value="Glycosylation">Glycosylation</option>
+<option value="Lysine Ubiquitination">Lysine Ubiquitination</option>
+<option value="Lysine-2-hydroxyisobutyrylaton">Lysine-2-hydroxyisobutyrylaton</option>
+<option value="S-Sulfonylation">S-Sulfonylation/option>
 
-"","","","","","","","","Dendranthema morifolium","Glycine max","Gossypium hirsutum","Hordeum vulgare","Hevea brasiliensis",
-    "Jatropha curcas","Kandelia candel","Lactuca sativa","Musa acuminata","Manihot esculenta","Nostoc flagelliforme","Nicotiana plumbaginifolia","Nuphar advena","Neobodo saliens","Oryza sativa subsp. japonica","Oryza sativa subsp. Indica","Populus canescens",
-  "Populus yunnanensis","Puccinellia tenuiflora","Populus trichocarpa","Prunus persica","Populus tomentosa","Populus euphratica","Phaseolus vulgaris","Populus tremula","Quercus rubra","Ricinus communis","Solanum lycopersicum","Solanum tuberosum","Setaria italica","Sugar Beet","Spinacia oleracea","Spinacia oleracea","Salvia miltiorrhiza","Sandersonia aurantiaca",
-"Triticum aestivum","Theobroma cacao","Vitis vinifera","Volvox carteri","Zea mays"
 
-<option value="Capsicum annuum">Capsicum annuum</option>
-<option value="Citrus sinensis">Citrus sinensis</option>
-<option value="Citrus clementina">Citrus clementina</option>
-<option value="Capsella rubella">Capsella rubella</option>
+
+
+
+
+
+

@@ -26,14 +26,14 @@
             <div class="card-tag">
               <!-- 中部的表切换tag -->
               <div class="tag_area">
-                <div class="tag" v-for="(item,index) in modList" :key="index" @click="clickTag2(item.val)">{{ item.name }}</div>       
+                <div class="tag" v-for="(item,index) in modList" :key="index" @click="clickTag2(item.val)" >{{ item.name }}</div>       
               </div>
             </div>
             <!-- table -->
             <div class="card-table">
               
               <div class="table_middle">
-                <div class="table_cell" v-for="(item,index) in proteinNameList[currentPage -1]" :key="index">
+                <div class="table_cell" v-for="(item,index) in proteinNameList[currentPage -1]" :key="index"  @click="clickname(item)">
                   {{ item }}
                 </div>            
               </div>
@@ -86,7 +86,7 @@
             <div class="card-table">
               
               <div class="table_middle">
-                <div class="table_cell" v-for="(item,index) in stressNameList[currentPage2 - 1]" :key="index">
+                <div class="table_cell" v-for="(item,index) in stressNameList[currentPage2 - 1]" :key="index" @click="clickname(item)">
                   {{ item }}
                 </div>            
               </div>
@@ -152,17 +152,29 @@ export default {
                 fontFamily: 'Times New Roman' // 字体为新罗马  
             }  
           }
+          
         },
         yAxis: {
-          axisLabel:{
-            
-            
+          axisLine: {  
+            show: true, // 确保Y轴轴线显示  
+            lineStyle: {  
+                color: '#000', // 轴线颜色，可以根据需要自定义  
+                width: 0.5 // 轴线宽度，可以根据需要调整  
+            } ,
             textStyle: {  
               color: '#333', // 字体颜色  
               fontWeight: 'bold', // 字体加粗  
               fontFamily: 'Times New Roman' // 字体为新罗马  
+          } 
+            
+          }  ,
+          axisTick: {  
+              show: true, // 确保Y轴刻度线显示  
+              // 还可以配置刻度线的长度、颜色等属性  
           }  
-        }},
+          
+        
+      },
         series: [
           {
             type: 'bar',
@@ -186,15 +198,26 @@ export default {
           
         },
         yAxis: {
-          axisLabel:{
-            
-            
+          axisLine: {  
+            show: true, // 确保Y轴轴线显示  
+            lineStyle: {  
+                color: '#000', // 轴线颜色，可以根据需要自定义  
+                width: 0.5 // 轴线宽度，可以根据需要调整  
+            } ,
             textStyle: {  
               color: '#333', // 字体颜色  
               fontWeight: 'bold', // 字体加粗  
               fontFamily: 'Times New Roman' // 字体为新罗马  
+          } 
+            
+          }  ,
+          axisTick: {  
+              show: true, // 确保Y轴刻度线显示  
+              // 还可以配置刻度线的长度、颜色等属性  
           }  
-        }},
+          
+
+        },
         series: [
           {
             type: 'bar',
@@ -237,6 +260,7 @@ export default {
     clickTag(val){
       console.log(val,'clickTag');
       this.modList = [];
+      this.stressList = [];
       // 假设这是服务端提供的数据
       this.$axios.post("/browseChart", {
         data: {
@@ -341,7 +365,19 @@ export default {
       this.stressNameList = this.chunkArray(val,this.pageSize2);
       // console.log(this.proteinNameList, 'clickTag2');
     },
+    clickname(val){
+      console.log(val,'clickname');
+      this.$axios.post("/searchname", {
+        data: {
+          val
+        }}).then(res =>{
+          // 跳转到result页面,需要把查询到的信息塞到result页面里
+          console.log(res,'------res');
 
+          store.SetSearchData(res);
+          this.$router.push('/result');
+        })
+    },
   
     chunkArray(array,pageSize) {
       let result = [];
@@ -418,5 +454,16 @@ export default {
 .footer {
   /* 在这里添加你的 CSS 样式 */
 
+}
+
+.table_cell {  
+  cursor: pointer; /* 设置鼠标指针样式为小手 */  
+  color:#007bff;
+  transition: color 0.3s, text-decoration 0.3s; /* 添加过渡效果，使变化更平滑 */  
+}  
+  
+.table_cell:hover {  
+  color: red; /* 鼠标悬停时文字变为红色 */  
+  text-decoration: underline; /* 鼠标悬停时文字添加下划线 */  
 }
 </style>

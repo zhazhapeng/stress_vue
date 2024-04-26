@@ -29,6 +29,11 @@ const router = createRouter({
       component: () => import('../components/Search.vue')
     },
     {
+      path: '/blast',
+      name: 'blast',
+      component: () => import('../components/Blast.vue')
+    },
+    {
       path: '/download',
       name: 'download',
       component: () => import('../components/Download.vue')

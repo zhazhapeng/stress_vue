@@ -9,8 +9,7 @@
         <div class="card-body alert-primary">Note: All the field are requied.</div>
         <!--div class="card-body alert-danger">The dataset of qPTMplants will be available for download after it is published!</div-->
         <div class="card-body">
-          <form id="email_form" name="email_form" onSubmit="return check_email_form()">
-
+          <div id="email_form" >
             <div class="row">
               <div class="col-md-1"></div>
               <div class="col-md-2">
@@ -293,35 +292,24 @@
                 <label for="dataset">Dataset</label>
                 <select class="form-control" name="dataset" id="dataset">
                   <option value="qPTMplants">ASPTM</option>
-                  
+                 
                   <!--option value="qPTM">qPTM</option-->
                 </select>
               </div>
               <div class="col-md-8">
                 <label for="country">Email</label>
                 <input class="form-control" type="text" name="email" id="email"></div>
-            </div>
+              </div>
+            <div class="button-container">
             
-            <div class="row">
-
-                <div class="col-md-3">
-                </div>
-                <div class="col-md-5">
-                  <div id="captcha"></div>
-                </div>
-                <div class="col-md-1">
-                  <input type="text" id="msg" name="msg" value="">
-                </div>
-                <div class="col-md-2">
-
-                  <button @click="downloadTableData" style="margin-top: 20px;">Download</button>
-                  <button type="submit" class="form-control btn btn-warning">Submit</button>
-                </div>
+               <button class="button " style="margin-left: 200px; width:150px; height: 40px;">Submit</button>
+              <button class="button " @click="downloadTableData('LTE')" >Download_LTE</button>
+              <button class="button " @click="downloadTableData('HTE')" >Download_HTE</button>
+            
             </div>
-
-          </form>     
+          </div>     
         </div>
-        <div class="card-footer">ASPTM is ONLY freely available for academic research. For commercial usage, please contact us</div>
+        <div class="card-footer">ASPTM is ONLY freely available for academic research. For commercial usage, please contact us.</div>
       </div>
 
     </div>
@@ -330,7 +318,6 @@
 </template>
 
 <script>
-import axios from 'axios'; 
 export default {
   name: "Footer",
   components: {
@@ -346,39 +333,73 @@ export default {
   },
   methods: {
     // 在这里定义方法
-    async downloadTableData() {  
-      try {  
-        // 调用后端API获取数据  
-       
-        const response = await  this.$axios.post('/download'); 
-        const data = response.data; // 假设后端返回的数据在response.data中  
+    // async downloadData() {  
+    //   try {  
+    //     const response = await fetch('/download-data'); // 后端 API 端点  
   
-        // 创建blob对象用于下载  
-        const blob = new Blob([data], { type: 'text/plain;charset=utf-8' });  
+    //     if (!response.ok) {  
+    //       throw new Error('Network response was not ok.');  
+    //     }  
   
-        // 创建一个用于下载的链接元素  
-        const link = document.createElement('a');  
-        link.href = window.URL.createObjectURL(blob);  
-        link.download = 'data.txt'; // 设置下载文件名  
-        link.style.display = 'none'; // 隐藏链接元素  
+    //     const blob = await response.blob();  
+    //     const url = window.URL.createObjectURL(blob);  
+    //     const link = document.createElement('a');  
+    //     link.href = url;  
+    //     link.setAttribute('download', 'database_data.txt'); // 设置文件名  
+    //     document.body.appendChild(link);  
+    //     link.click();  
   
-        // 将链接元素添加到DOM中  
-        document.body.appendChild(link);  
-  
-        // 模拟点击链接元素实现下载  
-        link.click();  
-  
-        // 下载完成后移除链接元素  
-        document.body.removeChild(link);  
-      } catch (error) {  
-        console.error('Error downloading data:', error);  
-        // 可以在这里处理错误，比如显示错误信息给用户  
-      }  
+    //     // 清理  
+    //     window.URL.revokeObjectURL(url);  
+    //     document.body.removeChild(link);  
+    //   } catch (error) {  
+    //     console.error('Error downloading data:', error);  
+    //     alert('无法下载数据，请稍后再试。');  
+    //   }  
+    // },
 
-      
-      // let url = `api/getexcel?name='HTE'`;
+    downloadTableData(val) {
+
+      this.$axios.post('/download', {sqlName:val},{responseType: 'blob'})
+      .then(res => {
+        console.log(res,'返回的数据');
+        this.downLoadFile(res, 'data.xlsx', () => {})
+      }).catch(error => {
+        console.log(error);
+      })
+
+      // console.log('downloadTableData');
+      // let url = '/api/download';
       // window.location = url;
-    },  
+    },
+
+    downLoadFile(fileData, fileName, callBack) {
+      // 创建Blob实例  fileData 接受的是一个Blob
+      let blob = new Blob([fileData], {
+        type: 'applicationnd.ms-excel',
+      })
+      if (!!window.ActiveXObject || 'ActiveXObject' in window) {
+        window.navigator.msSaveOrOpenBlob(blob, fileName)
+      } else {
+        // 创建a标签
+        const link = document.createElement('a')
+        // 隐藏a标签
+        link.style.display = 'none'
+        // 在每次调用 createObjectURL() 方法时，都会创建一个新的 URL 指定源 object的内容
+        // 或者说(link.href 得到的是一个地址，你可以在浏览器打开。指向的是文件资源)
+        link.href = URL.createObjectURL(blob)
+        console.log('link.href指向的是文件资源', link.href)
+        //设置下载为excel的名称
+        link.setAttribute('download', fileName)
+        document.body.appendChild(link)
+        // 模拟点击事件
+        link.click()
+        // 移除a标签
+        document.body.removeChild(link)
+        // 回调函数，表示下载成功
+        callBack(true) 
+      }
+    }
   },
   created() {
     // 在这里执行组件创建后的逻辑
@@ -392,5 +413,33 @@ export default {
 <style lang="scss" scoped>
 .footer {
   /* 在这里添加你的 CSS 样式 */
+}
+.button {  
+  /* 设置按钮的背景色为橘黄色 */  
+  background-color: orange;  
+    
+  /* 设置按钮的文本颜色（如果需要） */  
+  color: white;  
+    
+  /* 其他的样式设置，比如字体、大小、边框等 */  
+  border: none;  
+  padding: 10px 20px;  
+  font-size: 16px;  
+  cursor: pointer; /* 默认设置小手图标 */  
+  transition: background-color 0.3s ease; /* 添加过渡效果 */  
+  cursor: pointer;  
+  border-radius: 6%; /* 设置边缘为椭圆形 */  
+  
+}  
+  
+.button:hover {  
+  /* 鼠标悬停时改变背景色 */  
+  background-color: darkorange;  
+}
+
+.button-container {  
+  display: flex; /* 使用flex布局 */  
+  justify-content: space-between; /* 可选：按钮之间均匀分布 */ 
+  margin-top: 20px; 
 }
 </style>

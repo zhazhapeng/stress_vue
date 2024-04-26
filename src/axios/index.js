@@ -2,8 +2,10 @@
 import axios from 'axios';
 
 // 这里可以定义一些初始配置，拦截器等
-axios.defaults.baseURL = '/api';
-axios.defaults.timeout = 5000;
+const environment = import.meta.env;
+console.log('environment',environment);
+axios.defaults.baseURL = environment.DEV ? '/api' : '/';
+axios.defaults.timeout = 50000;
 
 axios.interceptors.request.use(config => {
     // 在发送请求之前做些什么
