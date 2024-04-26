@@ -11,7 +11,7 @@
           <div id="browse-control-org">
             <!-- 顶部的图切换tag -->
             <div class="tag_area">
-              <div class="tag" v-for="(item,index) in tagList" :key="index" @click="clickTag(item)">{{ item }}</div>
+              <div class="tag" v-for="(item,index) in tagList" :class="{'selected' : index == activeTag}" :key="index" @click="clickTag(item,index)">{{ item }}</div>
             </div>
             <div class="chart_area">
               <v-chart class="protein_chart" :option="proteinOption" autoresize />
@@ -142,7 +142,7 @@ export default {
     return {
       proteinOption: {
         xAxis: {
-          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+          data: ['Phosphorylation', 'Glycation', 'N-terminal Acetylation', 'S-nitrosylation',  'Lysine SUMOylation',  'Lysine Acetylation', 'S-sulfenylation',  'methylation',  'N-glycosylation',  ' phosphorylation ',  'S-nitrosylation ',  'Lysine Ubiquitination',  'S-Nitrosylation', 'phosphorylation',  'Lysine-2-hydroxyisobutyrylaton',  'Lysine Acetylation '],
           axisLabel:{
             show:true,
             rotate: 45,
@@ -178,14 +178,14 @@ export default {
         series: [
           {
             type: 'bar',
-            data: [63, 24, 18, 25, 27, 28, 25]
+            data: [101968, 416, 1055, 46, 89, 556,  2649,  16,  249,  57,  27,  1,  1,  105,  41,  12]
             
           }
         ]
       },
       proteinOption2: {
         xAxis: {
-          data: ['a', 'b', 'x', 'c', 'd', 'f', 'g'],
+          data: ['Osmotic Stress ', 'Nitrogen Stress', 'Osmotic Stress',  'Drought Stress', 'Fe deficiency Stress',  'Salt Stress','Heat Stress',  'Boron Deficiency Stress', 'Osmotic and Salt Stress',  'Cold Stress',  'Submergence Stress', 'Genotoxic Stress',  'Salinity and Oxidative Stress',  'High C and Low N Stress',  'Dehydration Stress',  'H2O2 Stress',  'Cadmium Stress',  'Low-Temperature Stress',  'Salt stress',  'Oxidative Stress and Heat Stress',  'Oxidative Stress',  'Dark-induced starvation Stress',  'Flooding Stress'],
           axisLabel:{
             show:true,
             rotate: 45,
@@ -221,7 +221,7 @@ export default {
         series: [
           {
             type: 'bar',
-            data: [63, 24, 18, 25, 27, 28, 25]
+            data: [ 2172,  3655,  861,  8591,  723,  528, 76,  7733,  7930,  55886,  1527,  5117,  976,  10,  8465,  2649,  16,  249,  57,  6,  8,  41,  12]
           }
         ]
       },
@@ -241,7 +241,7 @@ export default {
          stressNameList:[],
         // 未分页，临时存储的胁迫数组名
         tempStressList: [],
-
+        activeTag: 1,
         currentPage:1,
         pageSize: 70,
         totalItems:10,
@@ -257,8 +257,9 @@ export default {
   },
   methods: {
     // 点击标签刷新图表
-    clickTag(val){
-      console.log(val,'clickTag');
+    clickTag(val,index){
+      console.log(val,'clickTag', index);
+      this.activeTag = index;
       this.modList = [];
       this.stressList = [];
       // 假设这是服务端提供的数据
@@ -309,7 +310,9 @@ export default {
         formatData.values.push(item.val);
       })
       this.proteinOption.xAxis.data = formatData.categories;
+      // console.log(this.proteinOption.xAxis.data,'-------111111')
       this.proteinOption.series[0].data = formatData.values;
+      // console.log(this.proteinOption.series[0].data,'-------222222')
     },
     
     loadCharts2(resdata2){
@@ -320,7 +323,9 @@ export default {
         formatData.values.push(item.val);
       })
       this.proteinOption2.xAxis.data = formatData.categories;
+      console.log(this.proteinOption2.xAxis.data,'-------333333')
       this.proteinOption2.series[0].data = formatData.values;
+      console.log(this.proteinOption2.series[0].data,'-------444444')
     },
     loadTable(){
 
@@ -412,6 +417,10 @@ export default {
       padding: 0.5rem 1rem;
       white-space: nowrap;
       border: solid 1px transparent;
+      &.selected{
+        border: solid 1px #e4e7ed;
+        color: cornflowerblue;
+      }
     }
     :hover{
       cursor:pointer;
