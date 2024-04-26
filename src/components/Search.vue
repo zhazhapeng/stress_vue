@@ -81,7 +81,7 @@
                   <div class="col-md-1"></div>
       
                   <div class="col-md-2">
-                    <select class="form-control my-select-mod" name="simple_search_org" id="simple_search_org">
+                    <select class="form-control my-select-mod con2" name="simple_search_org" id="simple_search_org">
                       <option value="">All organisms</option>
                       <option value="Arachis hypogaea">Arachis hypogaea</option>
                       <option value="Arabidopsis thaliana">Arabidopsis thaliana</option>
@@ -152,7 +152,7 @@
                   </div>
       
                   <div class="col-md-2">
-                    <select class="form-control my-select-mod" name="simple_search_mod" id="simple_search_mod">
+                    <select class="form-control my-select-mod con2" name="simple_search_mod" id="simple_search_mod">
                       <option value="">All modifications</option>
                       <option value="S-nitrosylation">S-nitrosylation</option>
                       <option value="Phosphorylation">Phosphorylation</option>
@@ -189,8 +189,6 @@
     </div>
     </div>
    
-  <br></br>  
-  <br></br>
     <div class="card">
       
       <div class="card-header"><h5 class="font-weight-bold">Blast search</h5></div>
@@ -340,5 +338,8 @@
     .btn{
       width: 150px;
       height: 38px;
+    }
+    .con2{
+      background-color:#57a8ec;
     }
     </style>

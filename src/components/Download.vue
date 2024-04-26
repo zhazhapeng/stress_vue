@@ -299,18 +299,14 @@
               <div class="col-md-8">
                 <label for="country">Email</label>
                 <input class="form-control" type="text" name="email" id="email"></div>
-            </div>
+              </div>
+            <div class="button-container">
             
-            <div >
-                  <button class="button " style="margin-left: 200px; width:150px;" @click="submitEmail">Submit</button>
-
-                  <button class="button" @click="downloadTableData('LTE')" style="margin-left: 200px; margin-top: 20px;">Download_LTE</button>
-
-                  <button class="button" @click="downloadTableData('HTE')" style="margin-left: 300px; margin-top: 20px">Download_HTE</button>
-                  
-               
+               <button class="button " style="margin-left: 200px; width:150px; height: 40px;">Submit</button>
+              <button class="button " @click="downloadTableData('LTE')" >Download_LTE</button>
+              <button class="button " @click="downloadTableData('HTE')" >Download_HTE</button>
+            
             </div>
-
           </div>     
         </div>
         <div class="card-footer">ASPTM is ONLY freely available for academic research. For commercial usage, please contact us.</div>
@@ -438,5 +434,11 @@ export default {
 .button:hover {  
   /* 鼠标悬停时改变背景色 */  
   background-color: darkorange;  
+}
+
+.button-container {  
+  display: flex; /* 使用flex布局 */  
+  justify-content: space-between; /* 可选：按钮之间均匀分布 */ 
+  margin-top: 20px; 
 }
 </style>

@@ -2,14 +2,16 @@
   <div class="welcome">
     <div class="row text-center">
       <div class="col-md-12">
-        <h2 class="animate animate__fadeInDown">Welcome to <span>ASPTM</span></h2>
+        <h2 class="animate animate__fadeInDown">Welcome to ASPTM</h2>
         <p class="animate animate__fadeInLeft">
+          Throughout the entire life cycle, plants often suffer from <span class="des-highlight">abiotic stresses</span> such as temperature, 
+          drought, and salinity in the environment, and have evolved complex response mechanisms.
           Post-translational modification (<span class="des-highlight">PTM</span
           >) is a biochemical process that changes the properties and extends
           the chemical composition of a protein by participating in the addition
           of chemical groups (such as phosphate, succinyl and sulfate) to
           specific amino acid residues or by proteolytic cleavage of the protein
-          sequence backbone. More than <span class="des-num">200</span> PTMs
+          sequence backbone. More than <span class="des-num">300</span> PTMs
           have been registered in UniProt, and they can regulate the structure,
           function, and localization of proteins. Plant PTMs play critical roles
           in nearly all biological processes, such as signal transduction,
@@ -17,21 +19,11 @@
           events.
         </p>
         <p class="animate animate__fadeInLeft">
-          Here, we developed an integrative database of PTMs in plants under stress named ASPTM, 
-          which curated and hosted the published 31 types of Stress including 261,389 sites on 
-          92,900proteins in 58 plant species from 111 literature. In addition, it also includes 
-          127 low throughput literature, involving 27 types of stress and 191 modification events under 12 species
-          <!-- Here, we developed an integrative database of quantitative PTMs in
-          plants named <span class="des-webname">qPTMplants</span>, which
-          curated and hosted the published <span class="des-num">23</span> types
-          of PTMs including <span class="des-num">429,821</span> sites on
-          <span class="des-num">123,551</span> proteins in
-          <span class="des-num">43</span> plant species from
-          <span class="des-num">293</span> literature. Moreover, we collected
-          and organized <span class="des-num">620,509</span> kinds of
-          quantitative events for <span class="des-num">136,700</span> sites on
-          <span class="des-num">55,361</span> proteins from
-          <span class="des-num">139</span> literature. -->
+          Here, we developed an integrative database of PTMs in plants under stress named <span class="des-name">ASPTM</span>, 
+          which curated and hosted the published <span class="des-num">31</span> types of Stress including <span class="des-num">261,389</span> sites on 
+          <span class="des-num">92,900</span> proteins in <span class="des-num">58</span> plant species from <span class="des-num">111</span> literature. In addition, it also includes 
+          <span class="des-num">127</span> low throughput literature, involving <span class="des-num">27</span> types of stress and <span class="des-num">191</span> modification events under <span class="des-num">12</span> species
+          
         </p>
       </div>
     </div>
@@ -46,7 +38,7 @@
         <div class="col-md-3"></div>
         <div class="col-md-2">
           <select
-            class="form-control my-select-tag"
+            class="form-control my-select-tag con1"
             id="simple_search_tag0"
             name="simple_search_tag0"
           >
@@ -73,7 +65,7 @@
 
         <div class="col-md-2">
           <select
-            class="form-control my-select-mod"
+            class="form-control my-select-mod con2"
             name="simple_search_org"
             id="simple_search_org"
           >
@@ -149,7 +141,7 @@
 
         <div class="col-md-2">
           <select
-            class="form-control my-select-mod"
+            class="form-control my-select-mod con2"
             name="simple_search_mod"
             id="simple_search_mod"
           >
@@ -175,17 +167,17 @@
           </select>
         </div>
         <div class="col-md-2">
-          <button @click="randomSelect()" type="button" class="form-control btn btn-info" id="Example">
+          <button @click="randomSelect()" type="button" class="form-control btn  btn-mine" id="Example">
             Example
           </button>
         </div>
         <div class="col-md-2">
-          <button type="reset" @click="reset()" class="form-control btn btn-success">
+          <button type="reset" @click="reset()" class="form-control btn btn-mine">
             Clear
           </button>
         </div>
         <div class="col-md-2">
-          <button type="submit" @click="searchData()" class="form-control btn btn-warning">
+          <button type="submit" @click="searchData()" class="form-control btn  btn-mine">
             Submit
           </button>
         </div>
@@ -259,15 +251,62 @@ export default {
 </script>
 
 <!-- // @media (min-width: 1024px)  -->
-<style lang="scss" scoped>
+<style >
+body .welcome{  
+    margin: 0 auto;  
+    max-width: 1200px; /* 这里的值可以根据你的设计需求进行调整 */  
+}
+ .animate__fadeInDown{
+  color:black;
+  font-weight: bold;
+  font-size: 50px;
+}
+.des-num{
+  color: #20c997;
+}
+.des-highlight{
+  color: #dc3545;
+}
+.des-name{
+  color: #ffc107;
+}
+.my-select-tag {
+    background-color: #77ca94;
+}
+.con2{
+  background-color:#57a8ec;
+}
+.form-control {
+    font-weight: bolder;
+    font-size: 1rem;
+}
+.btn-mine {
+    background-color: #ffc000;
+    height: 40px;
+}
+.btn-mine:focus {  
+    /* 聚焦时的按钮样式 */  
+    background-color: #ffc107; /* 聚焦时背景色变浅 */
+    transition: color .15s 
+      
+   
+}
   .row {
       .text-center {
         .animate__fadeInLeft{
           color: black;
         }
       }
+
       p{
         color: black;
+        font-weight: 500; 
+        text-align: justify;  
+        text-indent: 2em; /* 首行缩进两个字符的宽度 */  
+        font-family: Arial, "Open Sans", sans-serif;
+        font-size: 18px;
+       
+        
       }
       .animate{
         animation-duration: 1s;
