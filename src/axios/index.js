@@ -4,7 +4,7 @@ import axios from 'axios';
 // 这里可以定义一些初始配置，拦截器等
 const environment = import.meta.env;
 console.log('environment',environment);
-axios.defaults.baseURL = environment.DEV ? '/api' : '/';
+axios.defaults.baseURL = environment.DEV ? '/api' : 'http://47.93.127.175:3000';
 axios.defaults.timeout = 50000;
 
 axios.interceptors.request.use(config => {

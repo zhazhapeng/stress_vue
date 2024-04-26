@@ -45,7 +45,7 @@
             <option value="Context">Any Field</option>
             <option value="ProteinID">Protein Accession</option>
             <option value="Genename">Gene Name</option>
-            <option value="Proteinnames">Protein Name</option>
+            <!-- <option value="Proteinnames">Protein Name</option> -->
             <option value="stress">Stress</option>
             <option value="Condition">Condition</option>
           </select>
@@ -145,7 +145,7 @@
             name="simple_search_mod"
             id="simple_search_mod"
           >
-            <option value="">All modifications</option>
+            <option value="All">All modifications</option>
             <option value="S-nitrosylation">S-nitrosylation</option>
             <option value="Phosphorylation">Phosphorylation</option>
             <option value="Lysine Acetylation">Lysine Acetylation</option>
@@ -204,7 +204,7 @@ export default {
       // let options4 = document.getElementById("simple_search_mod").options;
       // // 随机选择
       // // console.log(options1,'------');
-      // let randomSeed = Math.floor(Math.random() * options1.length);
+      let randomSeed = Math.floor(Math.random() * options1.length);
       options1[1].selected = true;
       // options3[randomSeed].selected = true;
       // options4[randomSeed].selected = true;
@@ -225,6 +225,11 @@ export default {
       let name = document.getElementById("simple_search_input0").value;
       let organisms = document.getElementById("simple_search_org").value;
       let modifications = document.getElementById("simple_search_mod").value;
+
+      if(field === 'Context'){
+        alert('查询条件1不能为空！');  
+        return;
+      }
 
       this.$axios.post("/search", {
         data: {
@@ -287,7 +292,6 @@ body .welcome{
    
 }
   .row {
-
       .text-center {
         .animate__fadeInLeft{
           color: black;

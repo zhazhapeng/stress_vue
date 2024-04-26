@@ -189,8 +189,6 @@
     </div>
     </div>
    
-  <br></br>  
-  <br></br>
     <div class="card">
       
       <div class="card-header"><h5 class="font-weight-bold">Blast search</h5></div>

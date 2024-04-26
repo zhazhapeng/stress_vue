@@ -333,32 +333,31 @@ export default {
   },
   methods: {
     // 在这里定义方法
-    // async downloadData() {  
-    //   try {  
-    //     const response = await fetch('/download-data'); // 后端 API 端点  
-  
-    //     if (!response.ok) {  
-    //       throw new Error('Network response was not ok.');  
-    //     }  
-  
-    //     const blob = await response.blob();  
-    //     const url = window.URL.createObjectURL(blob);  
-    //     const link = document.createElement('a');  
-    //     link.href = url;  
-    //     link.setAttribute('download', 'database_data.txt'); // 设置文件名  
-    //     document.body.appendChild(link);  
-    //     link.click();  
-  
-    //     // 清理  
-    //     window.URL.revokeObjectURL(url);  
-    //     document.body.removeChild(link);  
-    //   } catch (error) {  
-    //     console.error('Error downloading data:', error);  
-    //     alert('无法下载数据，请稍后再试。');  
-    //   }  
-    // },
+    submitEmail(){
+
+      let firstname = document.getElementById('firstname').value;
+      let lastname = document.getElementById('lastname').value;
+      let email = document.getElementById('email').value;
+      let name = firstname + lastname;
+      if(email == '' || firstname == ''){
+        alert('邮箱或名称不能为空！');
+        return;
+      }
+      
+      this.$axios.post('/subemail', {name,email})
+      .then(res => {
+        console.log(res,'返回的数据');
+        alert("Dear: " + name + '. The relevant data information will be sent to your email:'+email +'later')
+      }).catch(error => {
+        console.log(error);
+      })
+
+    },
 
     downloadTableData(val) {
+      if(val == 'HTE'){
+        alert('此文件数据量较大，请您耐心等待，如果未下载成功，请输入您的邮箱地址，稍后将会通过邮件的形式发送给您！');
+      }
 
       this.$axios.post('/download', {sqlName:val},{responseType: 'blob'})
       .then(res => {
